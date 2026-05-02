@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import {
   ArrowRight, ArrowUpRight, Check, MessageCircle, ChevronRight, Calendar,
-  Users, BarChart3, Zap, ShieldCheck, Globe, Inbox, Megaphone, KeyRound, Home,
-  Search, FileText, UploadCloud, Wand2, Rocket, Building2, HeartHandshake, Bell,
+  Users, BarChart3, Zap, ShieldCheck, Globe, Inbox, UploadCloud, Wand2, Rocket,
 } from 'lucide-react';
 import { CountUp } from './components/CountUp';
 import {
@@ -11,6 +10,8 @@ import {
 } from './components/PhoneMockup';
 import { DashboardScreen } from './components/DashboardMockup';
 import { TestimonialsGrid } from './components/Testimonials';
+import { ParaInmobiliarias, ParaAgentes, DemoFreeBanner } from './components/PerfilSections';
+import { AnimatedCheck, FlowArrow, PulsingDot, StepsConnector, MorphingBlob } from './components/SvgAnimations';
 import {
   HubSpotLogo, SalesforceLogo, MicrosoftLogo, ZohoLogo, Bitrix24Logo,
   SperantLogo, EvoltaLogo, TokkoLogo, PlanOKLogo,
@@ -19,6 +20,7 @@ import {
 } from './components/Logos';
 
 const APP_DEMO_URL = 'https://tamibot.github.io/demo-app/';
+const WA_URL = 'https://wa.me/51995547575?text=Hola%20quiero%20mi%20demo%20gratuita%20de%202%20semanas';
 
 export default function App() {
   useEffect(() => {
@@ -46,15 +48,16 @@ export default function App() {
       <ClientsStrip />
       <Stats />
       <HowItWorks />
-      <AudienceSplit />
+      <ParaInmobiliarias />
+      <ParaAgentes />
       <FeatureCapture />
       <FeatureQualify />
       <FeatureSchedule />
       <FeatureDistribute />
-      <FeatureBlast />
       <PhoneGallery />
       <CrmCloud />
       <Testimonials />
+      <DemoFreeBanner />
       <Pricing />
       <FinalCTA />
       <Footer />
@@ -67,8 +70,9 @@ function DemoBanner() {
   return (
     <div className="bg-ink text-paper text-[11px] font-medium py-2.5 text-center px-4 z-50 relative">
       <span className="inline-flex items-center gap-2">
-        <span className="text-[10px] tracking-[0.25em] font-bold uppercase text-paper/50">Demo</span>
-        <span>Esto es una versión de prueba en GitHub Pages.</span>
+        <PulsingDot color="var(--secondary)" size={5} />
+        <span className="text-[10px] tracking-[0.25em] font-bold uppercase text-paper/55">Demo gratuita</span>
+        <span>14 días sin tarjeta · sin compromiso · solo resultados.</span>
         <a href={APP_DEMO_URL} className="text-secondary font-bold inline-flex items-center gap-1 hover:underline underline-offset-4">
           Ver el portal en vivo <ArrowUpRight className="w-3 h-3" />
         </a>
@@ -86,10 +90,10 @@ function Nav() {
           <span className="text-[26px] font-black tracking-tight">tami</span>
           <span className="text-primary text-2xl font-black leading-none">.</span>
         </a>
-        <div className="hidden md:flex items-center gap-8 text-[13px] font-medium text-muted">
+        <div className="hidden md:flex items-center gap-7 text-[13px] font-medium text-muted">
           <a href="#como-funciona" className="hover:text-ink transition">Cómo funciona</a>
-          <a href="#audiencia" className="hover:text-ink transition">Para ti</a>
-          <a href="#producto" className="hover:text-ink transition">Producto</a>
+          <a href="#para-inmobiliarias" className="hover:text-ink transition">Inmobiliarias</a>
+          <a href="#para-agentes" className="hover:text-ink transition">Agentes</a>
           <a href="#integraciones" className="hover:text-ink transition">Integraciones</a>
           <a href="#precios" className="hover:text-ink transition">Precios</a>
         </div>
@@ -97,8 +101,8 @@ function Nav() {
           <a href={APP_DEMO_URL} className="hidden sm:inline-flex text-[13px] font-medium text-muted hover:text-ink px-3 py-2">
             Iniciar sesión
           </a>
-          <a href={APP_DEMO_URL} className="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-2 text-white text-[13px] font-bold pl-4 pr-3 py-2 rounded-full transition group shadow-sm">
-            Probar gratis
+          <a href={APP_DEMO_URL} className="inline-flex items-center gap-1.5 bg-primary hover:bg-primary-2 text-white text-[13px] font-bold pl-4 pr-3 py-2 rounded-full transition shadow-cta group">
+            Demo gratis 14 días
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" />
           </a>
         </div>
@@ -111,47 +115,47 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden hero-bg grain border-b border-soft">
-      <div className="absolute inset-0 pointer-events-none" aria-hidden>
-        <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-primary-soft rounded-full blur-3xl opacity-60 -translate-y-1/3 translate-x-1/4" />
-        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-secondary-soft rounded-full blur-3xl opacity-40 -translate-x-1/2" />
-      </div>
-
-      <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-36">
+      <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-32">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
           {/* LEFT */}
           <div className="reveal-init">
-            <div className="inline-flex items-center gap-2 bg-paper border border-soft rounded-full px-3 py-1.5 mb-8 shadow-card">
-              <span className="relative flex w-1.5 h-1.5">
-                <span className="absolute inset-0 rounded-full bg-secondary animate-ping opacity-60" />
-                <span className="relative w-1.5 h-1.5 rounded-full bg-secondary" />
-              </span>
+            <div className="inline-flex items-center gap-2 bg-paper border border-soft rounded-full px-3 py-1.5 mb-7 shadow-card">
+              <PulsingDot color="var(--secondary)" size={6} />
               <span className="text-[11px] font-semibold text-muted">+2.6M leads inmobiliarios atendidos en LATAM</span>
             </div>
 
-            <h1 className="text-[clamp(2.6rem,5.6vw,4.4rem)] leading-[1.02] font-black tracking-tight mb-7">
-              El <span className="text-gradient">Chatbot con IA</span><br />
+            <h1 className="text-[clamp(2.6rem,5.6vw,4.4rem)] leading-[1.02] font-black tracking-tight mb-6">
+              El <span className="text-primary">Chatbot con IA</span><br />
               que cierra ventas<br />
               inmobiliarias por <span className="underline-curve">WhatsApp</span>.
             </h1>
 
-            <p className="text-[18px] leading-relaxed text-muted max-w-[520px] mb-10">
+            <p className="text-[18px] leading-relaxed text-muted max-w-[520px] mb-9">
               Automatiza tu equipo de ventas. Tami atiende prospectos, califica perfiles y agenda visitas <strong className="text-ink">24/7</strong> — tu equipo solo cierra los leads que ya están listos.
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 mb-12">
-              <a href={APP_DEMO_URL} className="group inline-flex items-center gap-2 bg-primary hover:bg-primary-2 text-white px-7 py-4 rounded-full font-bold text-[14px] transition shadow-card">
-                Solicitar demo gratuita
+            {/* Primary CTAs */}
+            <div className="flex flex-wrap items-center gap-3 mb-7">
+              <a href={APP_DEMO_URL} className="group inline-flex items-center gap-2 bg-primary hover:bg-primary-2 text-white px-7 py-4 rounded-full font-bold text-[14px] transition shadow-cta">
+                Comenzar mis 14 días gratis
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </a>
-              <a href="#como-funciona" className="inline-flex items-center gap-2 px-6 py-4 rounded-full font-bold text-[14px] text-muted hover:text-ink transition">
+              <a href="#como-funciona" className="inline-flex items-center gap-2 px-6 py-4 rounded-full font-bold text-[14px] text-ink border border-soft hover:border-primary-line hover:bg-primary-soft/40 transition">
                 Ver cómo funciona <ChevronRight className="w-4 h-4" />
               </a>
             </div>
 
+            {/* Trust strip with animated checks */}
             <div className="flex flex-wrap items-center gap-x-7 gap-y-3 text-[13px] text-muted">
-              <span className="inline-flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-primary" /> 14 días gratis</span>
-              <span className="inline-flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-primary" /> 0% comisión sobre cierres</span>
-              <span className="inline-flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-primary" /> Sin tarjeta para empezar</span>
+              <span className="inline-flex items-center gap-1.5">
+                <AnimatedCheck className="w-4 h-4" color="var(--primary)" delay={0} /> 14 días gratis
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <AnimatedCheck className="w-4 h-4" color="var(--primary)" delay={150} /> 0% comisión sobre cierres
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <AnimatedCheck className="w-4 h-4" color="var(--primary)" delay={300} /> Sin tarjeta para empezar
+              </span>
             </div>
           </div>
 
@@ -190,6 +194,7 @@ function Hero() {
               </div>
             </PhoneFrame>
 
+            {/* Floating chips */}
             <div className="hidden md:flex absolute -left-8 top-20 bg-paper border border-soft rounded-2xl px-4 py-3 shadow-mega items-center gap-3 animate-float">
               <div className="w-9 h-9 rounded-full bg-primary-soft text-primary flex items-center justify-center">
                 <Zap className="w-4 h-4" />
@@ -203,6 +208,11 @@ function Hero() {
               <div className="text-[10px] uppercase tracking-widest text-muted-2 font-bold">Productividad</div>
               <div className="text-base font-black leading-none">×4 vs humano</div>
             </div>
+
+            {/* Decorative SVG sparkle */}
+            <svg className="hidden md:block absolute -top-6 right-12 w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2 L13 9 L20 10 L13 11 L12 18 L11 11 L4 10 L11 9 Z" fill="var(--primary)" className="svg-pulse" />
+            </svg>
           </div>
         </div>
       </div>
@@ -252,7 +262,7 @@ function Stats() {
         <div className="grid md:grid-cols-4 gap-10 lg:gap-4">
           {stats.map((s, i) => (
             <div key={i} className="reveal-init text-center md:text-left" style={{ animationDelay: `${i * 100}ms` }}>
-              <div className="text-6xl lg:text-[5rem] font-black tracking-tight leading-none mb-3 text-gradient">
+              <div className="text-6xl lg:text-[5rem] font-black tracking-tight leading-none mb-3 text-primary">
                 <CountUp end={s.v} decimals={s.decimals} suffix={s.suffix} prefix={s.prefix} />
               </div>
               <p className="text-[13px] text-muted leading-snug max-w-[180px] md:max-w-none mx-auto md:mx-0">{s.d}</p>
@@ -272,26 +282,26 @@ function HowItWorks() {
       icon: UploadCloud,
       title: 'Comparte tu información',
       desc: 'Sube tus PDFs, danos el link de tu web, conéctanos a tu Sperant/Tokko/Evolta o pásanos tu Excel. Tami estructura tu inventario en minutos.',
-      bullets: ['PDF · Web · Excel · Sheets · API'],
+      bullets: ['PDF', 'Web', 'Excel', 'API'],
     },
     {
       n: '02',
       icon: Wand2,
       title: 'Entrenamos a Tami',
       desc: 'Configuramos el tono, las preguntas de calificación, las reglas de descuento y la estrategia de cierre. Tami se adapta a tu marca.',
-      bullets: ['Tono · Reglas · Templates · Calificación'],
+      bullets: ['Tono', 'Reglas', 'Templates', 'Calificación'],
     },
     {
       n: '03',
       icon: Rocket,
       title: 'Conectamos y despegamos',
-      desc: 'Activamos WhatsApp Business API, conectamos tus redes y portales (Urbania, Adondevivir, Nexo) y Tami empieza a atender leads de inmediato.',
-      bullets: ['WhatsApp · Meta Ads · Instagram · Portales'],
+      desc: 'Activamos WhatsApp Business API, conectamos tus redes y portales (Urbania, Adondevivir, Nexo). Tami atiende leads desde el día 1.',
+      bullets: ['WhatsApp', 'Meta Ads', 'Instagram', 'Portales'],
     },
   ];
 
   return (
-    <section id="como-funciona" className="py-24 lg:py-32 bg-paper">
+    <section id="como-funciona" className="py-24 lg:py-32 bg-paper relative">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 bg-primary-soft text-primary-2 rounded-full px-3 py-1.5 mb-5 reveal-init">
@@ -299,7 +309,7 @@ function HowItWorks() {
             <span className="text-[11px] font-bold uppercase tracking-wider">Onboarding express · 48 horas</span>
           </div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init mb-5">
-            En 48h tienes tu <span className="text-gradient">vendedora con IA</span> operando.
+            En 48h tienes tu vendedora con IA <span className="text-primary">operando</span>.
           </h2>
           <p className="text-[16px] text-muted leading-relaxed reveal-init">
             No instalas nada, no migras nada. Conectamos lo que ya usas y Tami empieza a vender.
@@ -307,15 +317,14 @@ function HowItWorks() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-5 relative">
-          {/* dotted connector */}
-          <div className="hidden md:block absolute top-12 left-[16.66%] right-[16.66%] h-px connector-dotted opacity-50" />
+          <StepsConnector />
 
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={i} className="relative bg-paper border border-soft rounded-3xl p-7 lg:p-8 shadow-card reveal-init" style={{ animationDelay: `${i * 100}ms` }}>
+              <div key={i} className="relative bg-paper border border-soft rounded-3xl p-7 lg:p-8 shadow-card hover:shadow-mega hover:-translate-y-0.5 transition reveal-init" style={{ animationDelay: `${i * 100}ms` }}>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center shadow-sm">
+                  <div className="w-12 h-12 rounded-2xl bg-primary text-white flex items-center justify-center shadow-cta">
                     <Icon className="w-5 h-5" />
                   </div>
                   <span className="text-[40px] font-black text-primary-soft leading-none select-none">{s.n}</span>
@@ -323,7 +332,7 @@ function HowItWorks() {
                 <h3 className="text-xl font-black mb-3">{s.title}</h3>
                 <p className="text-[14px] text-muted leading-relaxed mb-5">{s.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
-                  {s.bullets[0].split(' · ').map((b, bi) => (
+                  {s.bullets.map((b, bi) => (
                     <span key={bi} className="text-[10px] font-bold uppercase tracking-wider bg-primary-soft text-primary-2 px-2 py-1 rounded">{b}</span>
                   ))}
                 </div>
@@ -332,103 +341,15 @@ function HowItWorks() {
           })}
         </div>
 
-        <div className="mt-12 text-center">
-          <a href={APP_DEMO_URL} className="inline-flex items-center gap-2 text-[14px] font-bold text-primary hover:text-primary-2 transition">
-            Ver el portal en vivo
-            <ArrowRight className="w-4 h-4" />
+        <div className="mt-12 text-center reveal-init">
+          <a href={APP_DEMO_URL} className="inline-flex items-center gap-2 bg-primary hover:bg-primary-2 text-white px-7 py-4 rounded-full font-bold text-[14px] transition shadow-cta group">
+            Comenzar mi onboarding gratis
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
           </a>
+          <p className="text-[12px] text-muted-2 mt-3">Activación en 48h · 14 días gratis · sin tarjeta</p>
         </div>
       </div>
     </section>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────────────── */
-function AudienceSplit() {
-  return (
-    <section id="audiencia" className="py-24 lg:py-32 bg-paper-2 border-y border-soft">
-      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Diseñada para tu modelo</div>
-          <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            Soluciones específicas para <span className="text-gradient">cada tipo</span> de negocio inmobiliario.
-          </h2>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {/* INMOBILIARIA */}
-          <div className="reveal-init bg-paper rounded-[2rem] p-8 lg:p-10 border border-soft shadow-card hover:shadow-mega hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-primary-soft rounded-full blur-3xl opacity-60 -translate-y-1/3 translate-x-1/3" />
-            <div className="relative">
-              <div className="w-14 h-14 rounded-2xl bg-primary-soft flex items-center justify-center mb-5">
-                <Building2 className="w-6 h-6 text-primary" />
-              </div>
-              <div className="inline-flex items-center gap-2 bg-paper-2 border border-soft text-muted rounded-full px-3 py-1 mb-4 text-[10px] font-bold uppercase tracking-wider">
-                Para grandes volúmenes
-              </div>
-              <h3 className="text-2xl lg:text-3xl font-black mb-3">Desarrolladoras<br />e Inmobiliarias.</h3>
-              <p className="text-[15px] text-muted leading-relaxed mb-7">
-                Gestiona miles de leads de tus lanzamientos. Tami califica el tráfico en verde/blanco y agenda citas para tu equipo de sala de ventas.
-              </p>
-
-              <ul className="space-y-3 mb-8">
-                <AudItem icon="🏢" text="Proyectos Nuevos verticales (preventa)" />
-                <AudItem icon="📍" text="Venta de lotes y terrenos" />
-                <AudItem icon="📢" text="Envíos masivos para lanzamientos" />
-                <AudItem icon="🎯" text="Distribución equitativa entre asesores" />
-                <AudItem icon="📊" text="Embudo y reportería ejecutiva" />
-                <AudItem icon="👥" text="Volumen de leads ilimitado" />
-              </ul>
-
-              <a href="#precios" className="block text-center w-full bg-primary hover:bg-primary-2 text-white px-6 py-4 rounded-full font-bold text-[14px] transition shadow-card group">
-                Ver solución para Proyectos
-                <ArrowRight className="w-4 h-4 inline-block ml-2 group-hover:translate-x-1 transition" />
-              </a>
-            </div>
-          </div>
-
-          {/* AGENTE */}
-          <div className="reveal-init bg-paper rounded-[2rem] p-8 lg:p-10 border border-soft shadow-card hover:shadow-mega hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-secondary-soft rounded-full blur-3xl opacity-60 -translate-y-1/3 translate-x-1/3" />
-            <div className="relative">
-              <div className="w-14 h-14 rounded-2xl bg-secondary-soft flex items-center justify-center mb-5">
-                <HeartHandshake className="w-6 h-6 text-secondary-2" />
-              </div>
-              <div className="inline-flex items-center gap-2 bg-paper-2 border border-soft text-muted rounded-full px-3 py-1 mb-4 text-[10px] font-bold uppercase tracking-wider">
-                Para equipos ágiles
-              </div>
-              <h3 className="text-2xl lg:text-3xl font-black mb-3">Agentes<br />y Agencias.</h3>
-              <p className="text-[15px] text-muted leading-relaxed mb-7">
-                Tu asistente 24/7. Muestra tu inventario variado, agenda visitas y perfila propietarios que quieren vender su inmueble.
-              </p>
-
-              <ul className="space-y-3 mb-8">
-                <AudItem icon="🏡" text="Reventa (segunda mano)" />
-                <AudItem icon="🔑" text="Alquileres automáticos" />
-                <AudItem icon="🤝" text="Captación de propiedades" />
-                <AudItem icon="🔍" text="Búsqueda en Urbania, Adondevivir, Nexo" />
-                <AudItem icon="📅" text="Agenda + recordatorios automáticos" />
-                <AudItem icon="💬" text="Cotizador y handoff inteligente" />
-              </ul>
-
-              <a href="#precios" className="block text-center w-full bg-secondary hover:bg-secondary-2 text-white px-6 py-4 rounded-full font-bold text-[14px] transition shadow-card group">
-                Ver solución para Agentes
-                <ArrowRight className="w-4 h-4 inline-block ml-2 group-hover:translate-x-1 transition" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AudItem({ icon, text }: { icon: string; text: string }) {
-  return (
-    <li className="flex items-center gap-3 text-[14px]">
-      <span className="text-xl shrink-0">{icon}</span>
-      <span className="font-medium">{text}</span>
-    </li>
   );
 }
 
@@ -459,9 +380,7 @@ function FeatureBlock({
           <ul className="space-y-3">
             {bullets.map((b, i) => (
               <li key={i} className="flex items-start gap-3 text-[14px]">
-                <span className="w-5 h-5 rounded-full bg-primary-soft text-primary flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-3 h-3" strokeWidth={3} />
-                </span>
+                <AnimatedCheck className="w-4 h-4 shrink-0 mt-1" color="var(--primary)" delay={i * 100} />
                 <span>{b}</span>
               </li>
             ))}
@@ -481,15 +400,15 @@ function FeatureCapture() {
     <section id="producto" className="py-24 lg:py-32 bg-paper">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-20">
-          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Producto</div>
+          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">El producto en detalle</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            Todo lo que necesita un <span className="text-gradient">equipo de ventas</span> moderno.
+            Todo lo que necesita un equipo de ventas <span className="text-primary">moderno</span>.
           </h2>
         </div>
 
         <FeatureBlock
           eyebrow="01 — Bandeja omnicanal"
-          title={<>Todos tus canales en <span className="text-gradient">una pantalla</span>.</>}
+          title="Todos tus canales en una pantalla."
           description="WhatsApp, Instagram, Meta Ads y portales (Urbania, Adondevivir, Nexo) integrados al 100%. Visualiza de dónde viene cada lead con etiquetas automáticas."
           bullets={[
             'WhatsApp Business Cloud API',
@@ -528,7 +447,7 @@ function InboxMockup() {
           <span className="text-[13px] font-bold">Bandeja omnicanal</span>
         </div>
         <span className="text-[11px] text-emerald-700 font-bold inline-flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <PulsingDot color="#10B981" size={6} />
           Tami atendiendo
         </span>
       </div>
@@ -563,7 +482,7 @@ function FeatureQualify() {
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
         <FeatureBlock
           eyebrow="02 — Calificación inteligente"
-          title={<>Distingue lo <span className="text-gradient">caliente</span> de lo curioso.</>}
+          title="Distingue lo caliente de lo curioso."
           description="Tami pregunta presupuesto, zona, tipo y crédito. Marca verde o blanco automáticamente, filtra basura y solo deriva al asesor lo que vale su tiempo."
           bullets={[
             'Verde / blanco automático con scoring',
@@ -586,7 +505,7 @@ function FeatureSchedule() {
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
         <FeatureBlock
           eyebrow="03 — Agendamiento automático"
-          title={<>Visitas que <span className="text-gradient">sí</span> se concretan.</>}
+          title="Visitas que sí se concretan."
           description="Tami consulta el calendario de tu asesor, propone tres slots, confirma con el lead y dispara recordatorios automáticos. Caída de visitas reducida hasta 30%."
           bullets={[
             'Sync con Google Calendar y GHL',
@@ -602,7 +521,7 @@ function FeatureSchedule() {
 }
 
 function CalendarMockup() {
-  const days = ['Lun 4', 'Mar 5', 'Mié 6', 'Jue 7', 'Vie 8', 'Sáb 9', 'Dom 10'];
+  const days = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
   const events = [
     { day: 1, hour: '10am', client: 'Familia González', proj: 'Vista del Mar', advisor: 'Alejandro G.' },
     { day: 2, hour: '4pm', client: 'Andrea Pérez', proj: 'Aurora', advisor: 'María C.' },
@@ -650,11 +569,11 @@ function CalendarMockup() {
 function FeatureDistribute() {
   return (
     <section className="py-24 lg:py-32 bg-ink text-paper relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+      <div className="absolute inset-0 bg-dots text-white/4" aria-hidden />
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8">
         <FeatureBlock
           eyebrow="04 — Distribución equitativa"
-          title={<>Reparte leads <span className="text-gradient">sin pelear</span>.</>}
+          title="Reparte leads sin pelear."
           description="Round-robin, por zona, por carga del asesor o por proyecto. Tu gerente comercial entra al chat con badge GERENTE en alta intención y cierra en vivo con el cliente."
           bullets={[
             'Round-robin · por zona · por carga · por proyecto',
@@ -683,7 +602,7 @@ function DistributionMockup() {
       <svg className="absolute top-4 right-4 w-32 h-32 opacity-30" viewBox="0 0 120 120" fill="none" aria-hidden>
         <circle cx="60" cy="60" r="50" stroke="var(--primary)" strokeWidth="0.5" strokeDasharray="2 4" />
         <circle cx="60" cy="60" r="30" stroke="var(--primary)" strokeWidth="0.5" strokeDasharray="2 4" />
-        <circle cx="60" cy="60" r="6" fill="var(--primary)" />
+        <circle cx="60" cy="60" r="6" fill="var(--primary)" className="svg-pulse" />
       </svg>
 
       <div className="text-[10px] font-bold uppercase tracking-widest text-primary-soft/80 mb-1">Reglas activas</div>
@@ -706,7 +625,7 @@ function DistributionMockup() {
               <div className="flex flex-col items-end gap-1">
                 <div className="text-[10px] font-bold text-primary-soft tabular-nums">{a.leads} activos</div>
                 <div className="w-20 h-1 bg-white/10 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-primary to-indigo-500 rounded-full" style={{ width: `${(a.leads / max) * 100}%` }} />
+                  <div className="h-full bg-primary rounded-full" style={{ width: `${(a.leads / max) * 100}%` }} />
                 </div>
               </div>
             </div>
@@ -716,68 +635,11 @@ function DistributionMockup() {
 
       <div className="mt-5 flex items-center justify-between text-[11px] pt-4 border-t border-white/10">
         <span className="text-paper/50">50 leads distribuidos hoy</span>
-        <span className="text-primary-soft font-bold inline-flex items-center gap-1">
-          <span className="relative flex w-1.5 h-1.5">
-            <span className="absolute inset-0 rounded-full bg-primary animate-ping" />
-            <span className="relative w-1.5 h-1.5 rounded-full bg-primary" />
-          </span>
+        <span className="text-primary-soft font-bold inline-flex items-center gap-1.5">
+          <PulsingDot color="var(--primary)" size={6} />
           Reasignación automática
         </span>
       </div>
-    </div>
-  );
-}
-
-/* ──────────────────────────────────────────────────────────────────────── */
-function FeatureBlast() {
-  return (
-    <section className="py-24 lg:py-32 bg-paper-2 border-y border-soft">
-      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
-        <FeatureBlock
-          eyebrow="05 — Envíos masivos · Captación · Alquileres"
-          title={<>Una sola Tami para <span className="text-gradient">todos</span> tus flujos.</>}
-          description="Lanzas un proyecto nuevo, captas propietarios que quieren vender, gestionas alquileres y haces seguimientos masivos — todo desde la misma plataforma, sin scripts ni planillas."
-          bullets={[
-            'Envíos masivos: BBDD propia + foto/video/PDF',
-            'Captación: perfila propietarios que quieren vender',
-            'Alquileres: flujo automatizado de visita a contrato',
-            'Seguimiento: 5 min · 2 h · 5 h · 1 semana (configurable)',
-          ]}
-          image={<MultiToolGrid />}
-        />
-      </div>
-    </section>
-  );
-}
-
-function MultiToolGrid() {
-  const tools = [
-    { icon: Megaphone, title: 'Envíos masivos', desc: 'Lanzamientos · ofertas · eventos', color: 'bg-primary-soft', text: 'text-primary-2', stat: '+5,000 leads en 24h', accent: 'bg-primary' },
-    { icon: HeartHandshake, title: 'Captación', desc: 'Perfila propietarios que venden', color: 'bg-secondary-soft', text: 'text-secondary-2', stat: 'Pre-evaluación de precio', accent: 'bg-secondary' },
-    { icon: KeyRound, title: 'Alquileres', desc: 'De consulta a contrato firmado', color: 'bg-blue-50', text: 'text-blue-700', stat: 'Visita en 48h', accent: 'bg-blue-500' },
-    { icon: Bell, title: 'Seguimiento', desc: 'Recupera leads enfriados', color: 'bg-amber-50', text: 'text-amber-700', stat: 'x30 cantidad de interesados', accent: 'bg-amber-500' },
-  ];
-  return (
-    <div className="grid grid-cols-2 gap-4">
-      {tools.map((t, i) => {
-        const Icon = t.icon;
-        return (
-          <div key={i} className="bg-paper border border-soft rounded-2xl p-5 shadow-card hover:shadow-mega hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group">
-            <div className={`absolute -top-8 -right-8 w-24 h-24 rounded-full ${t.color} opacity-50 group-hover:scale-125 transition`} />
-            <div className="relative">
-              <div className={`w-11 h-11 rounded-xl ${t.color} ${t.text} flex items-center justify-center mb-4`}>
-                <Icon className="w-5 h-5" />
-              </div>
-              <h4 className="text-[15px] font-black mb-1.5">{t.title}</h4>
-              <p className="text-[12px] text-muted leading-relaxed mb-4">{t.desc}</p>
-              <div className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider">
-                <span className={`w-1.5 h-1.5 rounded-full ${t.accent}`} />
-                <span className={t.text}>{t.stat}</span>
-              </div>
-            </div>
-          </div>
-        );
-      })}
     </div>
   );
 }
@@ -790,7 +652,7 @@ function PhoneGallery() {
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Tami en acción</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            3 conversaciones <span className="text-gradient">reales</span> de un día.
+            3 conversaciones <span className="text-primary">reales</span> de un día.
           </h2>
         </div>
 
@@ -851,7 +713,7 @@ function CrmCloud() {
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Integraciones</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            No <span className="text-gradient">cambies</span> tu CRM.<br />Tami se conecta a lo que ya usas.
+            No cambies tu CRM.<br />Tami se conecta a <span className="text-primary">lo que ya usas</span>.
           </h2>
         </div>
 
@@ -915,7 +777,7 @@ function Testimonials() {
         <div className="max-w-3xl mb-14">
           <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Testimonios</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            Inmobiliarias que pasaron del<br />caos al <span className="text-gradient">pipeline real</span>.
+            Inmobiliarias que pasaron del<br />caos al <span className="text-primary">pipeline real</span>.
           </h2>
         </div>
         <div className="reveal-init">
@@ -934,8 +796,7 @@ function Pricing() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Precios</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            Lo mismo que un <span className="text-gradient">asesor junior</span>.<br />
-            Con un equipo entero adentro.
+            Lo mismo que un asesor junior.<br />Con un equipo entero <span className="text-primary">adentro</span>.
           </h2>
           <p className="text-muted mt-5">14 días gratis · 0% comisión · sin tarjeta para empezar.</p>
         </div>
@@ -953,7 +814,7 @@ function Pricing() {
               'Agendamiento + recordatorios',
               'Cotizador PDF',
             ]}
-            cta="Comenzar demo"
+            cta="Comenzar mis 14 días"
           />
           <PriceCard
             tag="Más solicitado"
@@ -969,7 +830,7 @@ function Pricing() {
               'Panel Supervisor multiusuario',
               'Embudo + atribución de canal',
             ]}
-            cta="Hablar con ventas"
+            cta="Comenzar mis 14 días"
             highlighted
           />
         </div>
@@ -1001,12 +862,12 @@ function PriceCard({ tag, title, price, iva, features, cta, highlighted }: any) 
         <ul className="space-y-3 mb-8 flex-1">
           {features.map((f: string, i: number) => (
             <li key={i} className={`flex items-start gap-3 text-[14px] ${highlighted ? 'text-paper/85' : 'text-ink-2'}`}>
-              <Check className="w-4 h-4 shrink-0 mt-0.5 text-primary" strokeWidth={3} />
+              <AnimatedCheck className="w-4 h-4 shrink-0 mt-1" color={highlighted ? 'var(--primary)' : 'var(--primary)'} delay={i * 80} />
               <span>{f}</span>
             </li>
           ))}
         </ul>
-        <a href={APP_DEMO_URL} className={`block text-center w-full py-3.5 rounded-full font-bold text-sm transition ${highlighted ? 'bg-primary hover:bg-primary-2 text-white' : 'bg-ink text-paper hover:bg-ink-2'}`}>
+        <a href={APP_DEMO_URL} className={`block text-center w-full py-3.5 rounded-full font-bold text-sm transition shadow-cta ${highlighted ? 'bg-primary hover:bg-primary-2 text-white' : 'bg-ink text-paper hover:bg-ink-2'}`}>
           {cta}
         </a>
       </div>
@@ -1020,7 +881,7 @@ function FinalCTA() {
     <section className="py-24 lg:py-28 bg-paper">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
         <div className="relative bg-ink rounded-[2.5rem] overflow-hidden p-10 lg:p-16 reveal-init">
-          <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
+          <div className="absolute inset-0 bg-dots text-white/6" aria-hidden />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/15 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
           <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-3xl translate-y-1/3" />
 
@@ -1029,18 +890,18 @@ function FinalCTA() {
               <ShieldCheck className="w-10 h-10 text-primary-soft mb-6" />
               <h2 className="text-[clamp(2rem,5vw,3.6rem)] font-black tracking-tight leading-[1.05] text-paper mb-5">
                 Sube tu primer<br />
-                <span className="text-gradient">brochure hoy</span>.
+                <span className="text-primary">brochure hoy</span>.
               </h2>
               <p className="text-paper/60 text-lg leading-relaxed max-w-md">
                 Conectamos lo que ya usas en 48h. Tami atiende leads reales en 14 días gratis. Si no convierte, no pagas.
               </p>
             </div>
             <div className="flex flex-col gap-3 lg:items-end">
-              <a href={APP_DEMO_URL} className="group inline-flex items-center gap-2 bg-primary hover:bg-primary-2 text-white px-7 py-4 rounded-full font-bold transition shadow-mega">
-                Solicitar demo gratuita
+              <a href={APP_DEMO_URL} className="group inline-flex items-center gap-2 bg-primary hover:bg-primary-2 text-white px-7 py-4 rounded-full font-bold transition shadow-cta">
+                Comenzar mis 14 días gratis
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </a>
-              <a href="https://wa.me/51995547575?text=Hola%20quiero%20una%20demo%20de%20TamiBot" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-bold text-paper border border-white/15 hover:bg-white/5 transition">
+              <a href={WA_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-bold text-paper border border-white/15 hover:bg-white/5 transition">
                 <MessageCircle className="w-4 h-4" /> Hablar con ventas por WhatsApp
               </a>
               <span className="text-[11px] text-paper/40 mt-2">+51 995 547 575 · mvelascoo@tamibot.com</span>
@@ -1070,7 +931,8 @@ function Footer() {
           <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4">Producto</div>
           <ul className="space-y-2.5 text-muted text-[13px]">
             <li><a href="#como-funciona" className="hover:text-ink">Cómo funciona</a></li>
-            <li><a href="#audiencia" className="hover:text-ink">Para ti</a></li>
+            <li><a href="#para-inmobiliarias" className="hover:text-ink">Para inmobiliarias</a></li>
+            <li><a href="#para-agentes" className="hover:text-ink">Para agentes</a></li>
             <li><a href="#integraciones" className="hover:text-ink">Integraciones</a></li>
             <li><a href="#precios" className="hover:text-ink">Precios</a></li>
             <li><a href={APP_DEMO_URL} className="hover:text-ink">Portal demo →</a></li>

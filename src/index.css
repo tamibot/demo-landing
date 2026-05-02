@@ -4,54 +4,54 @@
 
 @layer base {
   :root {
-    /* Branding original tamibot.com — morado primario + teal secundario */
-    --paper:        #FFFFFF;     /* fondo principal blanco como tamibot.com */
-    --paper-2:      #F8F7FB;     /* fondo soft con tinte morado */
-    --paper-3:      #EDE9F4;     /* lavender suave para hero */
+    /* Branding tamibot.com — morado primario sólido */
+    --paper:        #FFFFFF;
+    --paper-2:      #FAF8FF;     /* fondo soft con tinte morado muy sutil */
+    --paper-3:      #F4F0FF;     /* lavender suave para hero */
+    --paper-4:      #ECE5FF;     /* lavender más profundo */
     --soft:         #ECECF0;     /* border line sutil */
-    --ink:          #111827;     /* gray-900 */
-    --ink-2:        #1F2937;     /* gray-800 */
-    --muted:        #6B7280;     /* gray-500 */
-    --muted-2:      #9CA3AF;     /* gray-400 */
+    --softer:       #F5F5F8;
+    --ink:          #0F0F1A;     /* casi negro con tinte azul */
+    --ink-2:        #1F1F2E;
+    --muted:        #5C5C6E;
+    --muted-2:      #9090A0;
 
-    --primary:      #9333EA;     /* purple-600 — color de marca tamibot.com */
-    --primary-2:    #7E22CE;     /* purple-700 hover */
-    --primary-soft: #FAF5FF;     /* purple-50 */
-    --primary-line: #E9D5FF;     /* purple-200 border */
+    --primary:      #9333EA;     /* purple-600 */
+    --primary-2:    #7E22CE;
+    --primary-3:    #6B21A8;     /* purple-800 darkest */
+    --primary-soft: #FAF5FF;
+    --primary-line: #E9D5FF;
 
-    --indigo:       #4F46E5;     /* indigo-600 (en algunos gradient text de tamibot.com) */
+    --indigo:       #4F46E5;
 
-    --secondary:      #14B8A6;   /* teal-500 — color secundario tamibot.com */
-    --secondary-2:    #0D9488;   /* teal-600 hover */
-    --secondary-soft: #F0FDFA;   /* teal-50 */
+    --secondary:      #14B8A6;
+    --secondary-2:    #0D9488;
+    --secondary-soft: #F0FDFA;
 
-    --whatsapp:     #075E54;     /* WA brand */
+    --whatsapp:     #075E54;
   }
 
   html {
-    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: var(--paper);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
   }
-
   body { overflow-x: hidden; }
-
-  ::selection {
-    background: var(--primary-soft);
-    color: var(--primary-2);
-  }
+  ::selection { background: var(--primary-soft); color: var(--primary-2); }
 }
 
 @layer utilities {
-  /* Tokens */
   .bg-paper { background-color: var(--paper); }
   .bg-paper-2 { background-color: var(--paper-2); }
   .bg-paper-3 { background-color: var(--paper-3); }
+  .bg-paper-4 { background-color: var(--paper-4); }
+  .bg-softer { background-color: var(--softer); }
   .bg-ink { background-color: var(--ink); }
   .bg-ink-2 { background-color: var(--ink-2); }
   .bg-primary { background-color: var(--primary); }
   .bg-primary-2 { background-color: var(--primary-2); }
+  .bg-primary-3 { background-color: var(--primary-3); }
   .bg-primary-soft { background-color: var(--primary-soft); }
   .bg-secondary { background-color: var(--secondary); }
   .bg-secondary-soft { background-color: var(--secondary-soft); }
@@ -63,17 +63,21 @@
   .text-muted-2 { color: var(--muted-2); }
   .text-primary { color: var(--primary); }
   .text-primary-2 { color: var(--primary-2); }
+  .text-primary-3 { color: var(--primary-3); }
   .text-secondary { color: var(--secondary); }
   .text-secondary-2 { color: var(--secondary-2); }
   .text-paper { color: var(--paper); }
 
   .border-soft { border-color: var(--soft); }
+  .border-softer { border-color: var(--softer); }
   .border-primary { border-color: var(--primary); }
   .border-primary-line { border-color: var(--primary-line); }
 
-  /* Hero gradient bg sutil — como tamibot.com */
+  /* Hero bg sutil */
   .hero-bg {
-    background: linear-gradient(180deg, rgba(147,51,234,0.03) 0%, rgba(79,70,229,0.02) 35%, transparent 70%);
+    background:
+      radial-gradient(ellipse at top right, rgba(147,51,234,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom left, rgba(20,184,166,0.04) 0%, transparent 60%);
   }
 
   /* Subtle paper grain */
@@ -82,18 +86,9 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.022;
+    opacity: 0.025;
     z-index: 1;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='nf'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23nf)'/%3E%3C/svg%3E");
-  }
-
-  /* Gradient text — solo morado→indigo (sutil, como tamibot.com) */
-  .text-gradient {
-    background: linear-gradient(90deg, #9333EA 0%, #4F46E5 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
   }
 
   /* Reveal on scroll */
@@ -111,7 +106,7 @@
   }
   .animate-marquee { animation: marquee 50s linear infinite; }
 
-  /* Phone mockup typing dots */
+  /* Phone typing */
   @keyframes typing-dot {
     0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
     30% { transform: translateY(-3px); opacity: 1; }
@@ -120,7 +115,7 @@
   .typing-dot:nth-child(2) { animation-delay: 0.2s; }
   .typing-dot:nth-child(3) { animation-delay: 0.4s; }
 
-  /* Sequential message reveal */
+  /* Sequential msg reveal */
   @keyframes msg-in {
     from { opacity: 0; transform: translateY(10px) scale(0.97); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
@@ -130,33 +125,56 @@
     animation: msg-in 0.5s cubic-bezier(.16,1,.3,1) forwards;
   }
 
-  /* SVG path drawing */
+  /* SVG path drawing (visible, larger length for long paths) */
   @keyframes draw-path {
     to { stroke-dashoffset: 0; }
   }
   .svg-draw {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
-    animation: draw-path 2s cubic-bezier(.5,0,.3,1) 0.3s forwards;
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: draw-path 2.5s cubic-bezier(.5,0,.3,1) forwards;
+  }
+  .svg-draw-fast {
+    stroke-dasharray: 500;
+    stroke-dashoffset: 500;
+    animation: draw-path 1.2s cubic-bezier(.5,0,.3,1) forwards;
+  }
+  .svg-draw-loop {
+    stroke-dasharray: 800;
+    stroke-dashoffset: 800;
+    animation: draw-path-loop 6s linear infinite;
+  }
+  @keyframes draw-path-loop {
+    0% { stroke-dashoffset: 800; }
+    50% { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: -800; }
   }
 
-  /* Soft shadows */
-  .shadow-card {
-    box-shadow:
-      0 1px 2px rgba(17, 24, 39, 0.04),
-      0 4px 12px rgba(17, 24, 39, 0.04);
+  /* SVG check stroke animation */
+  @keyframes check-draw {
+    from { stroke-dashoffset: 30; }
+    to   { stroke-dashoffset: 0; }
   }
-  .shadow-mega {
-    box-shadow:
-      0 2px 4px rgba(17, 24, 39, 0.04),
-      0 12px 32px rgba(17, 24, 39, 0.06),
-      0 24px 64px -16px rgba(147, 51, 234, 0.14);
+  .svg-check {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: check-draw 0.5s cubic-bezier(.5,0,.3,1) forwards;
   }
-  .shadow-laptop {
-    box-shadow:
-      0 4px 6px rgba(17, 24, 39, 0.05),
-      0 20px 40px rgba(17, 24, 39, 0.10),
-      0 48px 96px -24px rgba(147, 51, 234, 0.16);
+
+  /* SVG circle pulse */
+  @keyframes circle-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.15); opacity: 0.7; }
+  }
+  .svg-pulse { animation: circle-pulse 2s ease-in-out infinite; transform-origin: center; }
+
+  /* Dotted dash flow */
+  @keyframes dash-flow {
+    to { stroke-dashoffset: -40; }
+  }
+  .dash-flow {
+    stroke-dasharray: 4 4;
+    animation: dash-flow 1.5s linear infinite;
   }
 
   /* Float */
@@ -167,43 +185,85 @@
   .animate-float { animation: float-y 5s ease-in-out infinite; }
   .animate-float-slow { animation: float-y 7s ease-in-out infinite; animation-delay: 1.2s; }
 
-  /* Pulse ring */
-  @keyframes pulse-ring {
-    0% { transform: scale(0.8); opacity: 1; }
-    100% { transform: scale(2.2); opacity: 0; }
+  /* Shadows */
+  .shadow-card {
+    box-shadow:
+      0 1px 2px rgba(15, 15, 26, 0.04),
+      0 4px 12px rgba(15, 15, 26, 0.04);
   }
-
-  /* Tilt for mockups */
-  .tilt-left { transform: perspective(1200px) rotateY(8deg) rotateX(2deg); }
-  .tilt-right { transform: perspective(1200px) rotateY(-8deg) rotateX(2deg); }
+  .shadow-mega {
+    box-shadow:
+      0 2px 4px rgba(15, 15, 26, 0.04),
+      0 12px 32px rgba(15, 15, 26, 0.06),
+      0 24px 64px -16px rgba(147, 51, 234, 0.18);
+  }
+  .shadow-laptop {
+    box-shadow:
+      0 4px 6px rgba(15, 15, 26, 0.05),
+      0 20px 40px rgba(15, 15, 26, 0.10),
+      0 48px 96px -24px rgba(147, 51, 234, 0.20);
+  }
+  .shadow-cta {
+    box-shadow:
+      0 4px 14px rgba(147, 51, 234, 0.30),
+      0 8px 28px rgba(147, 51, 234, 0.18);
+  }
 
   /* Hide scrollbar */
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { scrollbar-width: none; }
 
-  /* Connector dotted line */
-  .connector-dotted {
-    background-image: linear-gradient(to right, var(--primary-line) 50%, transparent 50%);
-    background-size: 12px 2px;
-    background-repeat: repeat-x;
-    background-position: center;
-  }
-
-  /* Underline curve like tamibot.com Hero */
+  /* Underline curve cleaner */
   .underline-curve {
     position: relative;
     display: inline-block;
+    z-index: 1;
   }
   .underline-curve::after {
     content: "";
     position: absolute;
-    bottom: -0.18em;
-    left: 0;
-    right: 0;
+    bottom: -0.05em;
+    left: -0.02em;
+    right: -0.02em;
     height: 0.18em;
-    background: linear-gradient(90deg, var(--primary), var(--indigo));
+    background: var(--primary);
     border-radius: 99px;
+    z-index: -1;
     opacity: 0.85;
-    transform: skewY(-1deg);
+    transform: skewX(-2deg) skewY(-0.5deg);
+  }
+
+  /* Highlight bg behind text — subtle yellow marker style */
+  .text-highlight {
+    background-image: linear-gradient(transparent 60%, #FEF08A 60%);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 0 0.1em;
+  }
+
+  /* Number badge with glow */
+  .num-badge {
+    position: relative;
+    color: var(--primary);
+  }
+  .num-badge::before {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    background: var(--primary-soft);
+    border-radius: 9999px;
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  /* Animated background dots */
+  @keyframes dots-shift {
+    0% { background-position: 0 0; }
+    100% { background-position: 24px 24px; }
+  }
+  .bg-dots {
+    background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+    background-size: 24px 24px;
+    animation: dots-shift 60s linear infinite;
   }
 }
