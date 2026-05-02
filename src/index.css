@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Manrope', system-ui, sans-serif;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #3B5CDD 0%, #9333EA 50%, #F472B6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.bg-lavender {
+  background-color: #F5F2FF;
+}
