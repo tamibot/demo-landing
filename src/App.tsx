@@ -24,9 +24,13 @@ export default function App() {
           obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
     els.forEach(el => obs.observe(el));
-    return () => obs.disconnect();
+    // Failsafe: anything still hidden after 2s gets shown
+    const t = window.setTimeout(() => {
+      document.querySelectorAll('.reveal-init:not(.reveal-show)').forEach(el => el.classList.add('reveal-show'));
+    }, 2000);
+    return () => { obs.disconnect(); window.clearTimeout(t); };
   }, []);
 
   return (
@@ -255,7 +259,7 @@ function ProblemSection() {
             <div
               key={i}
               className={`reveal-init relative p-7 rounded-3xl border ${it.dark ? 'bg-ink text-white border-ink' : 'bg-white border-soft shadow-soft'}`}
-              style={{ transitionDelay: `${i * 80}ms` }}
+              style={{ animationDelay: `${i * 80}ms` }}
             >
               <div className="absolute top-5 right-5 text-2xl">{it.e}</div>
               <div className={`font-display text-5xl font-extrabold tracking-tighter ${it.dark ? '' : 'text-gradient'}`}>{it.v}</div>
@@ -369,7 +373,7 @@ function ProcessFlow() {
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={i} className="bg-ink p-8 group hover:bg-white/[0.04] transition reveal-init" style={{ transitionDelay: `${i * 60}ms` }}>
+              <div key={i} className="bg-ink p-8 group hover:bg-white/[0.04] transition reveal-init" style={{ animationDelay: `${i * 60}ms` }}>
                 <div className="flex items-center gap-3 mb-5">
                   <div className="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-gradient-tami transition">
                     <Icon className="w-4 h-4" />
@@ -586,7 +590,7 @@ function Stats() {
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8 lg:gap-4">
           {stats.map((s, i) => (
-            <div key={i} className="reveal-init text-center md:text-left" style={{ transitionDelay: `${i * 80}ms` }}>
+            <div key={i} className="reveal-init text-center md:text-left" style={{ animationDelay: `${i * 80}ms` }}>
               <div className="font-display text-6xl lg:text-7xl font-extrabold tracking-tighter mb-3">
                 <span className="text-gradient">
                   <CountUp end={s.v} decimals={s.decimals} suffix={s.suffix} prefix={s.prefix} />
