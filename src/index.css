@@ -4,24 +4,32 @@
 
 @layer base {
   :root {
-    /* Editorial premium palette — inspired by Mercury, Linear, Resend */
-    --paper:        #FAFAF8;     /* warm cream paper */
-    --paper-2:      #F2F0EB;     /* slightly darker cream */
-    --paper-3:      #EAE7E0;     /* warm border */
-    --ink:          #0A0A0A;     /* near-black, not pure */
-    --ink-2:        #1A1A1A;     /* slightly lighter ink */
-    --muted:        #595959;     /* medium gray */
-    --muted-2:      #8A8780;     /* warm muted */
-    --accent:       #0F8A6B;     /* deep emerald — money + WhatsApp + nature */
-    --accent-2:     #0B6A52;     /* darker emerald for hover */
-    --accent-soft:  #E6F4EF;     /* mint paper */
-    --accent-line:  #C7E5DA;     /* soft emerald border */
-    --highlight:    #FFE9A8;     /* soft yellow (for highlights/marker) */
+    /* Branding original tamibot.com — morado primario + teal secundario */
+    --paper:        #FFFFFF;     /* fondo principal blanco como tamibot.com */
+    --paper-2:      #F8F7FB;     /* fondo soft con tinte morado */
+    --paper-3:      #EDE9F4;     /* lavender suave para hero */
+    --soft:         #ECECF0;     /* border line sutil */
+    --ink:          #111827;     /* gray-900 */
+    --ink-2:        #1F2937;     /* gray-800 */
+    --muted:        #6B7280;     /* gray-500 */
+    --muted-2:      #9CA3AF;     /* gray-400 */
+
+    --primary:      #9333EA;     /* purple-600 — color de marca tamibot.com */
+    --primary-2:    #7E22CE;     /* purple-700 hover */
+    --primary-soft: #FAF5FF;     /* purple-50 */
+    --primary-line: #E9D5FF;     /* purple-200 border */
+
+    --indigo:       #4F46E5;     /* indigo-600 (en algunos gradient text de tamibot.com) */
+
+    --secondary:      #14B8A6;   /* teal-500 — color secundario tamibot.com */
+    --secondary-2:    #0D9488;   /* teal-600 hover */
+    --secondary-soft: #F0FDFA;   /* teal-50 */
+
     --whatsapp:     #075E54;     /* WA brand */
   }
 
   html {
-    font-family: 'Manrope', system-ui, sans-serif;
+    font-family: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background: var(--paper);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
@@ -30,54 +38,42 @@
   body { overflow-x: hidden; }
 
   ::selection {
-    background: var(--accent);
-    color: white;
+    background: var(--primary-soft);
+    color: var(--primary-2);
   }
 }
 
 @layer utilities {
-  .font-display {
-    font-family: 'Fraunces', 'Manrope', serif;
-    font-feature-settings: 'ss01' on, 'ss02' on;
-    letter-spacing: -0.025em;
-  }
-
   /* Tokens */
   .bg-paper { background-color: var(--paper); }
   .bg-paper-2 { background-color: var(--paper-2); }
   .bg-paper-3 { background-color: var(--paper-3); }
   .bg-ink { background-color: var(--ink); }
   .bg-ink-2 { background-color: var(--ink-2); }
-  .bg-accent { background-color: var(--accent); }
-  .bg-accent-2 { background-color: var(--accent-2); }
-  .bg-accent-soft { background-color: var(--accent-soft); }
-  .bg-highlight { background-color: var(--highlight); }
+  .bg-primary { background-color: var(--primary); }
+  .bg-primary-2 { background-color: var(--primary-2); }
+  .bg-primary-soft { background-color: var(--primary-soft); }
+  .bg-secondary { background-color: var(--secondary); }
+  .bg-secondary-soft { background-color: var(--secondary-soft); }
   .bg-whatsapp { background-color: var(--whatsapp); }
 
   .text-ink { color: var(--ink); }
   .text-ink-2 { color: var(--ink-2); }
   .text-muted { color: var(--muted); }
   .text-muted-2 { color: var(--muted-2); }
-  .text-accent { color: var(--accent); }
+  .text-primary { color: var(--primary); }
+  .text-primary-2 { color: var(--primary-2); }
+  .text-secondary { color: var(--secondary); }
+  .text-secondary-2 { color: var(--secondary-2); }
   .text-paper { color: var(--paper); }
 
-  .border-soft { border-color: var(--paper-3); }
-  .border-accent { border-color: var(--accent); }
-  .border-accent-line { border-color: var(--accent-line); }
+  .border-soft { border-color: var(--soft); }
+  .border-primary { border-color: var(--primary); }
+  .border-primary-line { border-color: var(--primary-line); }
 
-  /* Editorial highlight — soft yellow marker behind text */
-  .highlight-marker {
-    background-image: linear-gradient(transparent 60%, var(--highlight) 60%, var(--highlight) 95%, transparent 95%);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    padding: 0 0.15em;
-  }
-
-  /* Italic serif accent — Fraunces optical italic */
-  .italic-serif {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-feature-settings: 'ss01' on;
+  /* Hero gradient bg sutil — como tamibot.com */
+  .hero-bg {
+    background: linear-gradient(180deg, rgba(147,51,234,0.03) 0%, rgba(79,70,229,0.02) 35%, transparent 70%);
   }
 
   /* Subtle paper grain */
@@ -86,9 +82,18 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.025;
+    opacity: 0.022;
     z-index: 1;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='nf'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23nf)'/%3E%3C/svg%3E");
+  }
+
+  /* Gradient text — solo morado→indigo (sutil, como tamibot.com) */
+  .text-gradient {
+    background: linear-gradient(90deg, #9333EA 0%, #4F46E5 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
   /* Reveal on scroll */
@@ -99,7 +104,7 @@
   .reveal-init { opacity: 0; }
   .reveal-show { animation: reveal-up 0.75s cubic-bezier(.16,1,.3,1) forwards; }
 
-  /* Marquee for logo strip */
+  /* Marquee */
   @keyframes marquee {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -135,23 +140,23 @@
     animation: draw-path 2s cubic-bezier(.5,0,.3,1) 0.3s forwards;
   }
 
-  /* Soft shadows — Mercury-style gentle */
+  /* Soft shadows */
   .shadow-card {
     box-shadow:
-      0 1px 2px rgba(10, 10, 10, 0.04),
-      0 4px 12px rgba(10, 10, 10, 0.04);
+      0 1px 2px rgba(17, 24, 39, 0.04),
+      0 4px 12px rgba(17, 24, 39, 0.04);
   }
   .shadow-mega {
     box-shadow:
-      0 2px 4px rgba(10, 10, 10, 0.04),
-      0 12px 32px rgba(10, 10, 10, 0.06),
-      0 24px 64px -16px rgba(10, 10, 10, 0.10);
+      0 2px 4px rgba(17, 24, 39, 0.04),
+      0 12px 32px rgba(17, 24, 39, 0.06),
+      0 24px 64px -16px rgba(147, 51, 234, 0.14);
   }
   .shadow-laptop {
     box-shadow:
-      0 4px 6px rgba(10, 10, 10, 0.05),
-      0 20px 40px rgba(10, 10, 10, 0.10),
-      0 48px 96px -24px rgba(15, 138, 107, 0.12);
+      0 4px 6px rgba(17, 24, 39, 0.05),
+      0 20px 40px rgba(17, 24, 39, 0.10),
+      0 48px 96px -24px rgba(147, 51, 234, 0.16);
   }
 
   /* Float */
@@ -167,16 +172,38 @@
     0% { transform: scale(0.8); opacity: 1; }
     100% { transform: scale(2.2); opacity: 0; }
   }
-  .pulse-ring::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    border: 2px solid var(--accent);
-    animation: pulse-ring 2s cubic-bezier(.16,1,.3,1) infinite;
-  }
 
-  /* Editorial scrollbar hide */
+  /* Tilt for mockups */
+  .tilt-left { transform: perspective(1200px) rotateY(8deg) rotateX(2deg); }
+  .tilt-right { transform: perspective(1200px) rotateY(-8deg) rotateX(2deg); }
+
+  /* Hide scrollbar */
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { scrollbar-width: none; }
+
+  /* Connector dotted line */
+  .connector-dotted {
+    background-image: linear-gradient(to right, var(--primary-line) 50%, transparent 50%);
+    background-size: 12px 2px;
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+
+  /* Underline curve like tamibot.com Hero */
+  .underline-curve {
+    position: relative;
+    display: inline-block;
+  }
+  .underline-curve::after {
+    content: "";
+    position: absolute;
+    bottom: -0.18em;
+    left: 0;
+    right: 0;
+    height: 0.18em;
+    background: linear-gradient(90deg, var(--primary), var(--indigo));
+    border-radius: 99px;
+    opacity: 0.85;
+    transform: skewY(-1deg);
+  }
 }
