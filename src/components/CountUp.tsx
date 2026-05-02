@@ -9,22 +9,34 @@ export function CountUp({ end, duration = 2000, decimals = 0, suffix = '', prefi
 
   useEffect(() => {
     if (!ref.current) return;
+    const node = ref.current;
+    const startAnimation = () => {
+      if (seen.current) return;
+      seen.current = true;
+      const start = performance.now();
+      const tick = (t: number) => {
+        const p = Math.min((t - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        setVal(eased * end);
+        if (p < 1) requestAnimationFrame(tick);
+        else setVal(end);
+      };
+      requestAnimationFrame(tick);
+    };
+    // If already in viewport at mount, start immediately
+    const rect = node.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (inView) {
+      startAnimation();
+      return;
+    }
     const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !seen.current) {
-        seen.current = true;
-        const start = performance.now();
-        const tick = (t: number) => {
-          const p = Math.min((t - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
-          setVal(eased * end);
-          if (p < 1) requestAnimationFrame(tick);
-          else setVal(end);
-        };
-        requestAnimationFrame(tick);
-      }
-    }, { threshold: 0.3 });
-    obs.observe(ref.current);
-    return () => obs.disconnect();
+      if (entry.isIntersecting) startAnimation();
+    }, { threshold: 0.1 });
+    obs.observe(node);
+    // Failsafe
+    const t = window.setTimeout(startAnimation, 3000);
+    return () => { obs.disconnect(); window.clearTimeout(t); };
   }, [end, duration]);
 
   const formatted = decimals > 0
