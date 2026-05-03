@@ -14,13 +14,21 @@ import { TestimonialsGrid } from './components/Testimonials';
 import { ParaInmobiliarias, ParaAgentes, DemoFreeBanner } from './components/PerfilSections';
 import { AnimatedCheck, PulsingDot, StepsConnector } from './components/SvgAnimations';
 import {
-  HubSpotLogo, SalesforceLogo, MicrosoftLogo, ZohoLogo, Bitrix24Logo,
-  SperantLogo, EvoltaLogo, TokkoLogo, PlanOKLogo,
-  LiderClientLogo, CosapiClientLogo, RemaxClientLogo,
   GrupoTCLogo, LibreLogo, LienLogo, GenericLogo,
-  UrbaniaPortalLogo, AdondevivirPortalLogo, NexoPortalLogo,
   WhatsAppGlyph, InstagramGlyph, MetaGlyph, MessengerGlyph,
 } from './components/Logos';
+
+const ASSET = (p: string) => `${import.meta.env.BASE_URL}${p}`;
+function BrandImg({ name, src, h = 'h-8', className = '' }: { name: string; src: string; h?: string; className?: string }) {
+  return (
+    <img
+      src={ASSET(`logos/brands/${src}`)}
+      alt={name}
+      className={`${h} w-auto opacity-70 hover:opacity-100 transition ${className}`}
+      loading="lazy"
+    />
+  );
+}
 
 const APP_DEMO_URL = 'https://tamibot.github.io/demo-app/';
 const WA_URL = 'https://wa.me/51995547575?text=Hola%20quiero%20mi%20demo%20gratuita%20de%202%20semanas';
@@ -251,7 +259,9 @@ function Hero() {
 /* ──────────────────────────────────────────────────────────────────────── */
 function ClientsStrip() {
   const clients = [
-    <LiderClientLogo />, <CosapiClientLogo />, <RemaxClientLogo />,
+    <BrandImg name="Líder Grupo Constructor" src="lider.png" h="h-8" />,
+    <BrandImg name="COSAPI Inmobiliaria" src="cosapi.png" h="h-9" />,
+    <BrandImg name="RE/MAX" src="remax.png" h="h-8" />,
     <GrupoTCLogo />, <LibreLogo />, <LienLogo />,
     <GenericLogo name="Comunidad" />, <GenericLogo name="Barqueros" />, <GenericLogo name="Innova&Build" />,
     <GenericLogo name="NOS" />, <GenericLogo name="Anden Inv." />, <GenericLogo name="Gestión Inm." />,
@@ -836,7 +846,7 @@ function PortalAutomation() {
             {/* Step 1 */}
             <div className="bg-paper-2 rounded-2xl p-5">
               <div className="flex items-center gap-2 mb-3">
-                <div className="text-primary"><UrbaniaPortalLogo className="h-5" /></div>
+                <BrandImg name="Urbania" src="urbania.png" h="h-6" />
               </div>
               <div className="text-[11px] font-bold uppercase tracking-widest text-muted-2 mb-1">Origen del lead</div>
               <div className="text-[13px] font-bold leading-snug">Andrea P. consulta el aviso "Aurora · Lima Centro"</div>
@@ -1022,20 +1032,16 @@ function CrmCloud() {
 
         <div className="bg-paper rounded-3xl border border-soft shadow-card p-8 lg:p-12 mb-6 reveal-init">
           <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-9 text-center">9 CRMs soportados de fábrica</div>
-          <div className="grid grid-cols-3 md:grid-cols-5 gap-y-12 gap-x-10 items-center justify-items-center text-muted-2">
-            <div className="hover:text-ink transition-colors"><SperantLogo /></div>
-            <div className="hover:text-ink transition-colors"><EvoltaLogo /></div>
-            <div className="hover:text-ink transition-colors"><TokkoLogo /></div>
-            <div className="opacity-60 hover:opacity-100 transition" style={{ filter: 'grayscale(1)' }}>
-              <img src={`${import.meta.env.BASE_URL}logos/hubspot.svg`} alt="HubSpot" className="h-7 hover:[filter:none]" style={{ filter: 'inherit' }} />
-            </div>
-            <div className="hover:text-ink transition-colors"><SalesforceLogo /></div>
-            <div className="hover:text-ink transition-colors"><Bitrix24Logo /></div>
-            <div className="hover:text-ink transition-colors"><PlanOKLogo /></div>
-            <div className="opacity-60 hover:opacity-100 transition" style={{ filter: 'grayscale(1)' }}>
-              <img src={`${import.meta.env.BASE_URL}logos/zoho.svg`} alt="Zoho" className="h-7" />
-            </div>
-            <div className="hover:text-ink transition-colors"><MicrosoftLogo /></div>
+          <div className="grid grid-cols-3 md:grid-cols-5 gap-y-12 gap-x-10 items-center justify-items-center">
+            <BrandImg name="Sperant" src="sperant.png" h="h-7" />
+            <BrandImg name="Evolta" src="evolta.png" h="h-7" />
+            <BrandImg name="Tokko Broker" src="tokko.png" h="h-7" />
+            <BrandImg name="HubSpot" src="../hubspot.svg" h="h-7" />
+            <BrandImg name="Salesforce" src="salesforce.png" h="h-7" />
+            <BrandImg name="Bitrix24" src="bitrix24.png" h="h-7" />
+            <BrandImg name="PlanOK" src="planok.png" h="h-7" />
+            <BrandImg name="Zoho" src="../zoho.svg" h="h-7" />
+            <BrandImg name="Microsoft Dynamics" src="microsoft.png" h="h-7" />
             <div className="text-[11px] font-semibold text-muted-2">+ más</div>
           </div>
         </div>
@@ -1072,10 +1078,10 @@ function CrmCloud() {
           </div>
           <div className="bg-paper rounded-3xl border border-soft shadow-card p-7 reveal-init">
             <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-5">Portales públicos · captación de leads</div>
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-5 text-muted-2">
-              <div className="hover:text-ink transition"><UrbaniaPortalLogo /></div>
-              <div className="hover:text-ink transition"><AdondevivirPortalLogo /></div>
-              <div className="hover:text-ink transition"><NexoPortalLogo /></div>
+            <div className="flex flex-wrap items-center gap-x-10 gap-y-6">
+              <BrandImg name="Urbania" src="urbania.png" h="h-8" />
+              <BrandImg name="Adondevivir" src="adondevivir.png" h="h-8" />
+              <BrandImg name="Nexo Inmobiliario" src="nexo.png" h="h-7" />
             </div>
           </div>
         </div>
