@@ -16,27 +16,28 @@ export function ParaInmobiliarias() {
 
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8">
         {/* Header */}
-        <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-end mb-14 reveal-init">
-          <div>
-            <div className="inline-flex items-center gap-2 bg-primary-soft border border-primary-line text-primary-2 rounded-full px-3 py-1.5 mb-5">
-              <Building2 className="w-3.5 h-3.5" />
-              <span className="text-[11px] font-bold uppercase tracking-wider">Para inmobiliarias y desarrolladoras</span>
-            </div>
-            <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05]">
-              Tu próximo lanzamiento sin <br />
-              equipos saturados ni <span className="underline-curve">leads enfriados</span>.
-            </h2>
-            <p className="text-[17px] text-muted leading-relaxed mt-5 max-w-[640px]">
-              Cuando lanzas un proyecto, los primeros 3 días reciben el 70% de los leads.
-              El resto del mes la sala de ventas se enfría y pierdes ROI de tus ads.
-              <strong className="text-ink"> Tami atiende todos los leads en 15 segundos</strong>, los califica y los distribuye al equipo correcto.
-            </p>
+        <div className="mb-14 reveal-init">
+          <div className="inline-flex items-center gap-2 bg-primary-soft border border-primary-line text-primary-2 rounded-full px-3 py-1.5 mb-5">
+            <Building2 className="w-3.5 h-3.5" />
+            <span className="text-[11px] font-bold uppercase tracking-wider">Para inmobiliarias y desarrolladoras</span>
           </div>
-          <div className="lg:text-right">
-            <div className="text-[11px] font-bold uppercase tracking-widest text-muted-2 mb-2">El resultado promedio</div>
-            <div className="flex items-baseline gap-3 lg:justify-end">
-              <span className="text-5xl font-black text-primary">+32%</span>
-              <span className="text-sm text-muted">en volumen separado</span>
+          <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
+            <div>
+              <h2 className="text-[clamp(2.2rem,4.8vw,3.6rem)] font-black tracking-tight leading-[1.05] max-w-[820px]">
+                Tu próximo lanzamiento sin equipos saturados ni <span className="underline-curve">leads enfriados</span>.
+              </h2>
+              <p className="text-[17px] text-muted leading-relaxed mt-5 max-w-[640px]">
+                Cuando lanzas un proyecto, los primeros 3 días reciben el 70% de los leads.
+                El resto del mes la sala de ventas se enfría y pierdes ROI de tus ads.
+                <strong className="text-ink"> Tami atiende todos los leads en 15 segundos</strong>, los califica y los distribuye al equipo correcto.
+              </p>
+            </div>
+            <div className="lg:text-right shrink-0">
+              <div className="text-[11px] font-bold uppercase tracking-widest text-muted-2 mb-2">El resultado promedio</div>
+              <div className="flex items-baseline gap-3 lg:justify-end">
+                <span className="text-5xl font-black text-primary">+32%</span>
+                <span className="text-sm text-muted">en volumen separado</span>
+              </div>
             </div>
           </div>
         </div>
@@ -88,19 +89,19 @@ export function ParaInmobiliarias() {
           />
         </div>
 
-        {/* CTA strip */}
-        <div className="bg-ink rounded-3xl p-8 lg:p-10 relative overflow-hidden">
-          <div className="absolute inset-0 bg-dots text-white/5" aria-hidden />
+        {/* CTA strip — light brand */}
+        <div className="bg-paper-3 border border-primary-line rounded-3xl p-8 lg:p-10 relative overflow-hidden">
+          <div className="absolute -top-12 -right-12 w-72 h-72 bg-primary-soft rounded-full blur-3xl opacity-60" />
           <div className="relative grid lg:grid-cols-2 gap-6 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-3 py-1 mb-3">
+              <div className="inline-flex items-center gap-2 bg-paper border border-primary-line rounded-full px-3 py-1.5 mb-3 shadow-card">
                 <PulsingDot color="var(--secondary)" size={6} />
-                <span className="text-[11px] font-bold uppercase tracking-widest text-paper">Demo gratuita · 2 semanas</span>
+                <span className="text-[11px] font-bold uppercase tracking-widest text-primary-2">Demo gratuita · 2 semanas</span>
               </div>
-              <h3 className="text-2xl lg:text-3xl font-black text-paper mb-2">
+              <h3 className="text-2xl lg:text-3xl font-black mb-2">
                 Sembramos tu Proyecto Estrella en 48 horas.
               </h3>
-              <p className="text-[14px] text-paper/70 max-w-md">
+              <p className="text-[14px] text-muted max-w-md">
                 Subimos tus brochures, conectamos tu Sperant/Tokko/Evolta y Tami atiende leads reales por 14 días. Si no convierte, no pagas.
               </p>
             </div>
@@ -109,8 +110,8 @@ export function ParaInmobiliarias() {
                 Comenzar mi demo
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </a>
-              <a href={WA_URL} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-[14px] text-paper border border-white/20 hover:bg-white/5 transition">
-                <MessageCircle className="w-4 h-4" /> Hablar con ventas
+              <a href={WA_URL} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-[14px] text-ink border border-soft hover:border-primary-line hover:bg-paper transition">
+                <MessageCircle className="w-4 h-4 text-primary" /> Hablar con ventas
               </a>
             </div>
           </div>
@@ -126,26 +127,27 @@ export function ParaAgentes() {
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-secondary-soft rounded-full blur-3xl opacity-50 -translate-y-1/3 -translate-x-1/3 pointer-events-none" />
 
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-[1fr_auto] gap-8 items-end mb-14 reveal-init">
-          <div>
-            <div className="inline-flex items-center gap-2 bg-secondary-soft border border-secondary/20 text-secondary-2 rounded-full px-3 py-1.5 mb-5">
-              <HeartHandshake className="w-3.5 h-3.5" />
-              <span className="text-[11px] font-bold uppercase tracking-wider">Para agentes inmobiliarios y agencias</span>
-            </div>
-            <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05]">
-              Vende reventa, alquileres y <br />
-              capta propiedades — <span className="text-secondary-2">sin perder fines de semana</span>.
-            </h2>
-            <p className="text-[17px] text-muted leading-relaxed mt-5 max-w-[640px]">
-              Tu cliente te escribe a las 11pm un domingo. Si respondes el lunes, ya separó con la competencia.
-              <strong className="text-ink"> Tami responde en 15 segundos a cualquier hora</strong>, te agenda visitas y deriva sólo los leads calientes a tu WhatsApp.
-            </p>
+        <div className="mb-14 reveal-init">
+          <div className="inline-flex items-center gap-2 bg-secondary-soft border border-secondary/20 text-secondary-2 rounded-full px-3 py-1.5 mb-5">
+            <HeartHandshake className="w-3.5 h-3.5" />
+            <span className="text-[11px] font-bold uppercase tracking-wider">Para agentes inmobiliarios y agencias</span>
           </div>
-          <div className="lg:text-right">
-            <div className="text-[11px] font-bold uppercase tracking-widest text-muted-2 mb-2">El resultado promedio</div>
-            <div className="flex items-baseline gap-3 lg:justify-end">
-              <span className="text-5xl font-black text-secondary-2">+20%</span>
-              <span className="text-sm text-muted">visitas agendadas</span>
+          <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
+            <div>
+              <h2 className="text-[clamp(2.2rem,4.8vw,3.6rem)] font-black tracking-tight leading-[1.05] max-w-[820px]">
+                Vende reventa, alquileres y capta propiedades — <span className="text-secondary-2">sin perder fines de semana</span>.
+              </h2>
+              <p className="text-[17px] text-muted leading-relaxed mt-5 max-w-[640px]">
+                Tu cliente te escribe a las 11pm un domingo. Si respondes el lunes, ya separó con la competencia.
+                <strong className="text-ink"> Tami responde en 15 segundos a cualquier hora</strong>, te agenda visitas y deriva sólo los leads calientes a tu WhatsApp.
+              </p>
+            </div>
+            <div className="lg:text-right shrink-0">
+              <div className="text-[11px] font-bold uppercase tracking-widest text-muted-2 mb-2">El resultado promedio</div>
+              <div className="flex items-baseline gap-3 lg:justify-end">
+                <span className="text-5xl font-black text-secondary-2">+20%</span>
+                <span className="text-sm text-muted">visitas agendadas</span>
+              </div>
             </div>
           </div>
         </div>
@@ -202,18 +204,18 @@ export function ParaAgentes() {
           />
         </div>
 
-        <div className="bg-ink rounded-3xl p-8 lg:p-10 relative overflow-hidden">
-          <div className="absolute inset-0 bg-dots text-white/5" aria-hidden />
+        <div className="bg-secondary-soft border border-secondary/20 rounded-3xl p-8 lg:p-10 relative overflow-hidden">
+          <div className="absolute -bottom-12 -left-12 w-72 h-72 bg-secondary-soft rounded-full blur-3xl opacity-80" />
           <div className="relative grid lg:grid-cols-2 gap-6 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 bg-secondary/20 border border-secondary/30 rounded-full px-3 py-1 mb-3">
+              <div className="inline-flex items-center gap-2 bg-paper border border-secondary/30 rounded-full px-3 py-1.5 mb-3 shadow-card">
                 <PulsingDot color="var(--secondary)" size={6} />
-                <span className="text-[11px] font-bold uppercase tracking-widest text-paper">Demo gratuita · 2 semanas</span>
+                <span className="text-[11px] font-bold uppercase tracking-widest text-secondary-2">Demo gratuita · 2 semanas</span>
               </div>
-              <h3 className="text-2xl lg:text-3xl font-black text-paper mb-2">
+              <h3 className="text-2xl lg:text-3xl font-black mb-2">
                 Tu asistente personal · funcionando este sábado.
               </h3>
-              <p className="text-[14px] text-paper/70 max-w-md">
+              <p className="text-[14px] text-muted max-w-md">
                 Subimos tus 10 propiedades estrella, conectamos tu WhatsApp Business y Tami empieza a atender este fin de semana. Sin tarjeta para empezar.
               </p>
             </div>
@@ -222,8 +224,8 @@ export function ParaAgentes() {
                 Comenzar mi demo
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </a>
-              <a href={WA_URL} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-[14px] text-paper border border-white/20 hover:bg-white/5 transition">
-                <MessageCircle className="w-4 h-4" /> Hablar con ventas
+              <a href={WA_URL} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-[14px] text-ink border border-soft hover:border-secondary/40 hover:bg-paper transition">
+                <MessageCircle className="w-4 h-4 text-secondary" /> Hablar con ventas
               </a>
             </div>
           </div>

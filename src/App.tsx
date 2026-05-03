@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
-  ArrowRight, ArrowUpRight, Check, MessageCircle, ChevronRight, Calendar,
+  ArrowRight, ArrowUpRight, Check, MessageCircle, ChevronRight, Calendar, Plus, Minus,
   Users, BarChart3, Zap, ShieldCheck, Globe, Inbox, UploadCloud, Wand2, Rocket,
+  Megaphone, Hash, Bell, Star, ChevronDown, ChevronUp, Clock, FileText, Sparkles,
 } from 'lucide-react';
 import { CountUp } from './components/CountUp';
 import {
@@ -11,12 +12,14 @@ import {
 import { DashboardScreen } from './components/DashboardMockup';
 import { TestimonialsGrid } from './components/Testimonials';
 import { ParaInmobiliarias, ParaAgentes, DemoFreeBanner } from './components/PerfilSections';
-import { AnimatedCheck, FlowArrow, PulsingDot, StepsConnector, MorphingBlob } from './components/SvgAnimations';
+import { AnimatedCheck, PulsingDot, StepsConnector } from './components/SvgAnimations';
 import {
   HubSpotLogo, SalesforceLogo, MicrosoftLogo, ZohoLogo, Bitrix24Logo,
   SperantLogo, EvoltaLogo, TokkoLogo, PlanOKLogo,
-  LiderClientLogo, CosapiClientLogo, RemaxClientLogo, GenericLogo,
+  LiderClientLogo, CosapiClientLogo, RemaxClientLogo,
+  GrupoTCLogo, LibreLogo, LienLogo, GenericLogo,
   UrbaniaPortalLogo, AdondevivirPortalLogo, NexoPortalLogo,
+  WhatsAppGlyph, InstagramGlyph, MetaGlyph, MessengerGlyph,
 } from './components/Logos';
 
 const APP_DEMO_URL = 'https://tamibot.github.io/demo-app/';
@@ -47,18 +50,22 @@ export default function App() {
       <Hero />
       <ClientsStrip />
       <Stats />
-      <HowItWorks />
+      <Beneficios />
       <ParaInmobiliarias />
       <ParaAgentes />
+      <HowItWorks />
       <FeatureCapture />
       <FeatureQualify />
       <FeatureSchedule />
       <FeatureDistribute />
+      <SocialAutomation />
+      <PortalAutomation />
       <PhoneGallery />
       <CrmCloud />
       <Testimonials />
       <DemoFreeBanner />
       <Pricing />
+      <FAQSection />
       <FinalCTA />
       <Footer />
     </div>
@@ -68,12 +75,12 @@ export default function App() {
 /* ──────────────────────────────────────────────────────────────────────── */
 function DemoBanner() {
   return (
-    <div className="bg-ink text-paper text-[11px] font-medium py-2.5 text-center px-4 z-50 relative">
+    <div className="bg-primary-3 text-paper text-[11px] font-medium py-2.5 text-center px-4 z-50 relative">
       <span className="inline-flex items-center gap-2">
-        <PulsingDot color="var(--secondary)" size={5} />
-        <span className="text-[10px] tracking-[0.25em] font-bold uppercase text-paper/55">Demo gratuita</span>
+        <PulsingDot color="#A7F3D0" size={5} />
+        <span className="text-[10px] tracking-[0.25em] font-bold uppercase text-paper/70">Demo gratuita</span>
         <span>14 días sin tarjeta · sin compromiso · solo resultados.</span>
-        <a href={APP_DEMO_URL} className="text-secondary font-bold inline-flex items-center gap-1 hover:underline underline-offset-4">
+        <a href={APP_DEMO_URL} className="text-paper underline decoration-[var(--secondary)] underline-offset-4 decoration-2 font-bold inline-flex items-center gap-1 hover:opacity-90">
           Ver el portal en vivo <ArrowUpRight className="w-3 h-3" />
         </a>
       </span>
@@ -83,6 +90,16 @@ function DemoBanner() {
 
 /* ──────────────────────────────────────────────────────────────────────── */
 function Nav() {
+  const [open, setOpen] = useState(false);
+  const links = [
+    { href: '#beneficios', label: 'Beneficios' },
+    { href: '#para-inmobiliarias', label: 'Inmobiliarias' },
+    { href: '#para-agentes', label: 'Agentes' },
+    { href: '#como-funciona', label: 'Cómo funciona' },
+    { href: '#integraciones', label: 'Integraciones' },
+    { href: '#precios', label: 'Precios' },
+    { href: '#faq', label: 'FAQ' },
+  ];
   return (
     <nav className="sticky top-0 z-40 bg-paper/85 backdrop-blur-xl border-b border-soft">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -90,12 +107,10 @@ function Nav() {
           <span className="text-[26px] font-black tracking-tight">tami</span>
           <span className="text-primary text-2xl font-black leading-none">.</span>
         </a>
-        <div className="hidden md:flex items-center gap-7 text-[13px] font-medium text-muted">
-          <a href="#como-funciona" className="hover:text-ink transition">Cómo funciona</a>
-          <a href="#para-inmobiliarias" className="hover:text-ink transition">Inmobiliarias</a>
-          <a href="#para-agentes" className="hover:text-ink transition">Agentes</a>
-          <a href="#integraciones" className="hover:text-ink transition">Integraciones</a>
-          <a href="#precios" className="hover:text-ink transition">Precios</a>
+        <div className="hidden lg:flex items-center gap-6 text-[13px] font-medium text-muted">
+          {links.map(l => (
+            <a key={l.href} href={l.href} className="hover:text-ink transition">{l.label}</a>
+          ))}
         </div>
         <div className="flex items-center gap-2">
           <a href={APP_DEMO_URL} className="hidden sm:inline-flex text-[13px] font-medium text-muted hover:text-ink px-3 py-2">
@@ -105,8 +120,22 @@ function Nav() {
             Demo gratis 14 días
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition" />
           </a>
+          <button onClick={() => setOpen(!open)} className="lg:hidden p-2 rounded-md hover:bg-paper-2" aria-label="menu">
+            {open ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+          </button>
         </div>
       </div>
+      {open && (
+        <div className="lg:hidden border-t border-soft bg-paper">
+          <div className="max-w-[1240px] mx-auto px-6 py-4 flex flex-col gap-1">
+            {links.map(l => (
+              <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="px-3 py-2.5 rounded-lg text-[14px] font-semibold text-ink-2 hover:bg-paper-2">
+                {l.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
@@ -117,7 +146,6 @@ function Hero() {
     <section className="relative overflow-hidden hero-bg grain border-b border-soft">
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-32">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
-          {/* LEFT */}
           <div className="reveal-init">
             <div className="inline-flex items-center gap-2 bg-paper border border-soft rounded-full px-3 py-1.5 mb-7 shadow-card">
               <PulsingDot color="var(--secondary)" size={6} />
@@ -125,16 +153,15 @@ function Hero() {
             </div>
 
             <h1 className="text-[clamp(2.6rem,5.6vw,4.4rem)] leading-[1.02] font-black tracking-tight mb-6">
-              El <span className="text-primary">Chatbot con IA</span><br />
-              que cierra ventas<br />
-              inmobiliarias por <span className="underline-curve">WhatsApp</span>.
+              Vende más departamentos<br />
+              con una <span className="text-primary">vendedora con IA</span><br />
+              que nunca duerme en <span className="underline-curve">WhatsApp</span>.
             </h1>
 
-            <p className="text-[18px] leading-relaxed text-muted max-w-[520px] mb-9">
-              Automatiza tu equipo de ventas. Tami atiende prospectos, califica perfiles y agenda visitas <strong className="text-ink">24/7</strong> — tu equipo solo cierra los leads que ya están listos.
+            <p className="text-[18px] leading-relaxed text-muted max-w-[540px] mb-9">
+              Tami atiende cada lead en <strong className="text-ink">15 segundos</strong>, califica la intención, agenda la visita y deriva al asesor solo cuando vale la pena. Conectada con tus portales, redes y CRM desde el día 1.
             </p>
 
-            {/* Primary CTAs */}
             <div className="flex flex-wrap items-center gap-3 mb-7">
               <a href={APP_DEMO_URL} className="group inline-flex items-center gap-2 bg-primary hover:bg-primary-2 text-white px-7 py-4 rounded-full font-bold text-[14px] transition shadow-cta">
                 Comenzar mis 14 días gratis
@@ -145,7 +172,6 @@ function Hero() {
               </a>
             </div>
 
-            {/* Trust strip with animated checks */}
             <div className="flex flex-wrap items-center gap-x-7 gap-y-3 text-[13px] text-muted">
               <span className="inline-flex items-center gap-1.5">
                 <AnimatedCheck className="w-4 h-4" color="var(--primary)" delay={0} /> 14 días gratis
@@ -159,7 +185,6 @@ function Hero() {
             </div>
           </div>
 
-          {/* RIGHT — phone mockup genérico */}
           <div className="relative reveal-init">
             <PhoneFrame className="w-[280px] sm:w-[310px] mx-auto">
               <div className="flex flex-col h-full">
@@ -194,7 +219,6 @@ function Hero() {
               </div>
             </PhoneFrame>
 
-            {/* Floating chips */}
             <div className="hidden md:flex absolute -left-8 top-20 bg-paper border border-soft rounded-2xl px-4 py-3 shadow-mega items-center gap-3 animate-float">
               <div className="w-9 h-9 rounded-full bg-primary-soft text-primary flex items-center justify-center">
                 <Zap className="w-4 h-4" />
@@ -204,12 +228,16 @@ function Hero() {
                 <div className="text-base font-black leading-none">15 segundos</div>
               </div>
             </div>
-            <div className="hidden md:block absolute -right-4 bottom-24 bg-paper border border-soft rounded-2xl px-4 py-3 shadow-mega animate-float-slow">
-              <div className="text-[10px] uppercase tracking-widest text-muted-2 font-bold">Productividad</div>
-              <div className="text-base font-black leading-none">×4 vs humano</div>
+            <div className="hidden md:flex absolute -right-4 bottom-24 bg-paper border border-soft rounded-2xl px-4 py-3 shadow-mega items-center gap-3 animate-float-slow">
+              <div className="w-9 h-9 rounded-full bg-secondary-soft text-secondary-2 flex items-center justify-center">
+                <Sparkles className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-[10px] uppercase tracking-widest text-muted-2 font-bold">Productividad</div>
+                <div className="text-base font-black leading-none">×4 vs humano</div>
+              </div>
             </div>
 
-            {/* Decorative SVG sparkle */}
             <svg className="hidden md:block absolute -top-6 right-12 w-8 h-8" viewBox="0 0 24 24" fill="none">
               <path d="M12 2 L13 9 L20 10 L13 11 L12 18 L11 11 L4 10 L11 9 Z" fill="var(--primary)" className="svg-pulse" />
             </svg>
@@ -224,7 +252,7 @@ function Hero() {
 function ClientsStrip() {
   const clients = [
     <LiderClientLogo />, <CosapiClientLogo />, <RemaxClientLogo />,
-    <GenericLogo name="Grupo T&C" />, <GenericLogo name="LIBRE" />, <GenericLogo name="LIEN" />,
+    <GrupoTCLogo />, <LibreLogo />, <LienLogo />,
     <GenericLogo name="Comunidad" />, <GenericLogo name="Barqueros" />, <GenericLogo name="Innova&Build" />,
     <GenericLogo name="NOS" />, <GenericLogo name="Anden Inv." />, <GenericLogo name="Gestión Inm." />,
   ];
@@ -235,7 +263,7 @@ function ClientsStrip() {
           Inmobiliarias y desarrolladoras que ya venden con Tami
         </p>
         <div className="relative overflow-hidden">
-          <div className="flex gap-14 lg:gap-20 animate-marquee">
+          <div className="flex gap-14 lg:gap-20 animate-marquee items-center">
             {[...clients, ...clients].map((logo, i) => (
               <div key={i} className="shrink-0 text-muted-2 hover:text-ink transition-colors">{logo}</div>
             ))}
@@ -275,28 +303,72 @@ function Stats() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
+function Beneficios() {
+  const items = [
+    { icon: Zap, title: 'Respuesta en 15 segundos', desc: 'Cero leads perdidos por no responder a tiempo. Tami atiende día y noche, fines de semana incluidos.', tag: 'Velocidad' },
+    { icon: Hash, title: 'Conectada a portales y redes', desc: 'Urbania, Adondevivir, Nexo, WhatsApp, Instagram, Meta Ads. Toda la conversación en un solo lugar.', tag: 'Omnicanal' },
+    { icon: Users, title: 'Calificación inteligente', desc: 'Pregunta presupuesto, zona, crédito y plazo. Marca verde / blanco automáticamente y filtra ruido.', tag: 'Filtro' },
+    { icon: Calendar, title: 'Agenda y recordatorios', desc: 'Sync con Google Calendar. Recordatorios 24h y 2h antes en WhatsApp. Reduce no-show ~30%.', tag: 'Visitas' },
+    { icon: BarChart3, title: 'Embudo en vivo', desc: 'Volumen, tasa de cierre, costo por lead, conversión por canal y por asesor. Atribución real.', tag: 'Reporte' },
+    { icon: ShieldCheck, title: 'Distribución equitativa', desc: 'Round-robin con balance de carga, por zona o por proyecto. Tu gerente entra al chat y cierra en vivo.', tag: 'Equipo' },
+  ];
+  return (
+    <section id="beneficios" className="py-24 lg:py-32 bg-paper">
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Beneficios</div>
+          <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
+            Lo que cambia <span className="text-primary">desde el día 1</span>.
+          </h2>
+          <p className="text-[16px] text-muted leading-relaxed reveal-init mt-4">
+            Sin contratar más asesores, sin migrar tu CRM. Solo enchufas y empieza a vender.
+          </p>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {items.map((it, i) => {
+            const Icon = it.icon;
+            return (
+              <div key={i} className="reveal-init bg-paper border border-soft rounded-3xl p-7 shadow-card hover:shadow-mega hover:-translate-y-0.5 transition" style={{ animationDelay: `${i * 70}ms` }}>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="w-11 h-11 rounded-2xl bg-primary-soft text-primary-2 flex items-center justify-center">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-2 bg-paper-2 px-2 py-1 rounded">{it.tag}</span>
+                </div>
+                <h3 className="text-lg font-black mb-2 leading-snug">{it.title}</h3>
+                <p className="text-[13px] text-muted leading-relaxed">{it.desc}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
 function HowItWorks() {
   const steps = [
     {
       n: '01',
       icon: UploadCloud,
       title: 'Comparte tu información',
-      desc: 'Sube tus PDFs, danos el link de tu web, conéctanos a tu Sperant/Tokko/Evolta o pásanos tu Excel. Tami estructura tu inventario en minutos.',
-      bullets: ['PDF', 'Web', 'Excel', 'API'],
+      desc: 'Súbenos PDFs, brochures, link de tu web o tu Excel. También conectamos directo a Urbania, Adondevivir, Nexo, Sperant, Tokko o Evolta. Tami estructura tu inventario en minutos.',
+      bullets: ['PDF · brochures', 'Web', 'Excel', 'Urbania', 'Adondevivir', 'Sperant'],
     },
     {
       n: '02',
       icon: Wand2,
       title: 'Entrenamos a Tami',
-      desc: 'Configuramos el tono, las preguntas de calificación, las reglas de descuento y la estrategia de cierre. Tami se adapta a tu marca.',
+      desc: 'Configuramos el tono, las preguntas de calificación, las reglas de descuento y la estrategia de cierre. Tami habla con la voz de tu marca, no como un bot genérico.',
       bullets: ['Tono', 'Reglas', 'Templates', 'Calificación'],
     },
     {
       n: '03',
       icon: Rocket,
       title: 'Conectamos y despegamos',
-      desc: 'Activamos WhatsApp Business API, conectamos tus redes y portales (Urbania, Adondevivir, Nexo). Tami atiende leads desde el día 1.',
-      bullets: ['WhatsApp', 'Meta Ads', 'Instagram', 'Portales'],
+      desc: 'Activamos WhatsApp Business API, conectamos tus redes, portales y CRM. Tami atiende leads reales desde el día 1 — tu equipo solo recibe los calientes.',
+      bullets: ['WhatsApp', 'Meta Ads', 'Instagram', 'Portales', 'CRM'],
     },
   ];
 
@@ -318,7 +390,6 @@ function HowItWorks() {
 
         <div className="grid md:grid-cols-3 gap-6 lg:gap-5 relative">
           <StepsConnector />
-
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
@@ -568,8 +639,9 @@ function CalendarMockup() {
 /* ──────────────────────────────────────────────────────────────────────── */
 function FeatureDistribute() {
   return (
-    <section className="py-24 lg:py-32 bg-ink text-paper relative overflow-hidden">
-      <div className="absolute inset-0 bg-dots text-white/4" aria-hidden />
+    <section className="py-24 lg:py-32 bg-paper-3 border-y border-primary-line/60 relative overflow-hidden">
+      <div className="absolute -top-20 -right-20 w-96 h-96 bg-primary-soft rounded-full blur-3xl opacity-70" />
+      <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-secondary-soft rounded-full blur-3xl opacity-50" />
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8">
         <FeatureBlock
           eyebrow="04 — Distribución equitativa"
@@ -598,15 +670,9 @@ function DistributionMockup() {
     { name: 'Roberto Salas', zones: 'Lima Sur', leads: 9, color: 'bg-amber-500' },
   ];
   return (
-    <div className="bg-ink-2 border border-white/10 rounded-3xl p-6 lg:p-7 relative overflow-hidden">
-      <svg className="absolute top-4 right-4 w-32 h-32 opacity-30" viewBox="0 0 120 120" fill="none" aria-hidden>
-        <circle cx="60" cy="60" r="50" stroke="var(--primary)" strokeWidth="0.5" strokeDasharray="2 4" />
-        <circle cx="60" cy="60" r="30" stroke="var(--primary)" strokeWidth="0.5" strokeDasharray="2 4" />
-        <circle cx="60" cy="60" r="6" fill="var(--primary)" className="svg-pulse" />
-      </svg>
-
-      <div className="text-[10px] font-bold uppercase tracking-widest text-primary-soft/80 mb-1">Reglas activas</div>
-      <div className="text-[13px] text-paper/75 mb-6 max-w-[380px]">
+    <div className="bg-paper border border-soft rounded-3xl p-6 lg:p-7 relative overflow-hidden shadow-mega">
+      <div className="text-[10px] font-bold uppercase tracking-widest text-primary-2 mb-1">Reglas activas</div>
+      <div className="text-[13px] text-muted mb-6 max-w-[380px]">
         Round-robin con balance de carga + filtro por zona del lead.
       </div>
 
@@ -614,17 +680,17 @@ function DistributionMockup() {
         {advisors.map((a, i) => {
           const max = 15;
           return (
-            <div key={i} className="bg-ink rounded-xl border border-white/5 p-3 flex items-center gap-3">
+            <div key={i} className="bg-paper-2 rounded-xl border border-soft p-3 flex items-center gap-3">
               <div className={`w-9 h-9 rounded-full ${a.color} text-white text-[11px] font-black flex items-center justify-center shrink-0`}>
                 {a.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
               </div>
               <div className="flex-1 min-w-0">
                 <div className="text-[12px] font-bold leading-tight">{a.name}</div>
-                <div className="text-[10px] text-paper/50 leading-tight mt-0.5">{a.zones}</div>
+                <div className="text-[10px] text-muted-2 leading-tight mt-0.5">{a.zones}</div>
               </div>
               <div className="flex flex-col items-end gap-1">
-                <div className="text-[10px] font-bold text-primary-soft tabular-nums">{a.leads} activos</div>
-                <div className="w-20 h-1 bg-white/10 rounded-full overflow-hidden">
+                <div className="text-[10px] font-bold text-primary-2 tabular-nums">{a.leads} activos</div>
+                <div className="w-20 h-1.5 bg-soft rounded-full overflow-hidden">
                   <div className="h-full bg-primary rounded-full" style={{ width: `${(a.leads / max) * 100}%` }} />
                 </div>
               </div>
@@ -633,13 +699,187 @@ function DistributionMockup() {
         })}
       </div>
 
-      <div className="mt-5 flex items-center justify-between text-[11px] pt-4 border-t border-white/10">
-        <span className="text-paper/50">50 leads distribuidos hoy</span>
-        <span className="text-primary-soft font-bold inline-flex items-center gap-1.5">
+      <div className="mt-5 flex items-center justify-between text-[11px] pt-4 border-t border-soft">
+        <span className="text-muted-2">50 leads distribuidos hoy</span>
+        <span className="text-primary-2 font-bold inline-flex items-center gap-1.5">
           <PulsingDot color="var(--primary)" size={6} />
           Reasignación automática
         </span>
       </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+function SocialAutomation() {
+  return (
+    <section className="py-24 lg:py-32 bg-paper">
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="reveal-init">
+            <div className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-4 inline-flex items-center gap-2">
+              <span className="w-5 h-px bg-primary" /> 05 — Automatización social
+            </div>
+            <h2 className="text-[clamp(1.9rem,3.5vw,2.8rem)] font-black tracking-tight leading-[1.05] mb-5">
+              Tu Instagram también <span className="text-primary">vende</span>.
+            </h2>
+            <p className="text-[16px] leading-relaxed text-muted mb-7 max-w-[480px]">
+              Cuando alguien comenta una palabra clave en tu post (<em className="not-italic font-semibold text-ink">"info"</em>, <em className="not-italic font-semibold text-ink">"precio"</em>, <em className="not-italic font-semibold text-ink">"brochure"</em>), Tami responde por DM al instante con catálogo, brochure y agenda de visita. Sin que mires el celular.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                'Comentario público → respuesta privada por DM',
+                'Reacciones a Stories disparan conversación',
+                'Mensaje desde Meta Ads entra a la misma bandeja',
+                'Captación 24/7 sin community manager',
+              ].map((b, i) => (
+                <li key={i} className="flex items-start gap-3 text-[14px]">
+                  <AnimatedCheck className="w-4 h-4 shrink-0 mt-1" color="var(--primary)" delay={i * 100} />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="flex items-center gap-3 text-muted-2">
+              <div className="w-10 h-10 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center"><InstagramGlyph className="w-5 h-5" /></div>
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center"><MetaGlyph className="w-6 h-4" /></div>
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center"><WhatsAppGlyph className="w-5 h-5" /></div>
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center"><MessengerGlyph className="w-5 h-5" /></div>
+            </div>
+          </div>
+
+          <div className="reveal-init">
+            <InstagramAutomationMockup />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function InstagramAutomationMockup() {
+  return (
+    <div className="grid grid-cols-[1.05fr_1fr] gap-4 items-start">
+      {/* Left: Instagram post */}
+      <div className="bg-paper border border-soft rounded-3xl overflow-hidden shadow-mega">
+        <div className="px-4 py-3 flex items-center gap-2.5 border-b border-soft">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-fuchsia-500 via-rose-500 to-amber-400 p-[2px]">
+            <div className="w-full h-full rounded-full bg-paper flex items-center justify-center text-xs font-bold">L</div>
+          </div>
+          <div className="flex-1">
+            <div className="text-[12px] font-bold leading-tight">lider.constructor</div>
+            <div className="text-[10px] text-muted-2">Lima · Patrocinado</div>
+          </div>
+          <InstagramGlyph className="w-4 h-4 text-pink-600" />
+        </div>
+        <div className="aspect-square bg-gradient-to-br from-purple-200 via-pink-200 to-amber-100 flex items-center justify-center text-5xl">🏢</div>
+        <div className="px-4 py-3 space-y-1.5">
+          <div className="text-[12px] leading-snug"><strong>lider.constructor</strong> Pre-venta Vista del Mar · 3D 78m² desde US$ 89,500. Comenta <strong className="text-primary">"INFO"</strong> y te enviamos el brochure 📩</div>
+          <div className="border-t border-soft mt-3 pt-2.5 space-y-2">
+            {[
+              { user: 'andrea_p21', text: 'INFO 🙌' },
+              { user: 'jcastro.lima', text: 'precio' },
+              { user: 'familia.gv', text: '¿brochure?' },
+            ].map((c, i) => (
+              <div key={i} className="text-[11px]">
+                <strong>{c.user}</strong> <span className="text-muted">{c.text}</span>
+                <span className="text-[9px] font-bold text-primary ml-2 bg-primary-soft px-1.5 py-0.5 rounded">disparado a Tami →</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Right: WhatsApp DM response */}
+      <div>
+        <div className="text-[10px] font-bold uppercase tracking-widest text-muted-2 mb-2 text-center">Respuesta automática · DM</div>
+        <PhoneFrame className="w-full max-w-[230px] mx-auto">
+          <div className="flex flex-col h-full">
+            <WhatsAppHeader contactName="Tami · IG DM" status="responde 24/7" avatar="🤖" />
+            <ChatArea>
+              <Bubble side="left" delay={100} time="9:42">INFO</Bubble>
+              <Bubble side="right" delay={600} time="9:42">¡Hola Andrea! 👋 Soy Tami, asistente de Líder.</Bubble>
+              <Bubble side="right" delay={1200} time="9:42">
+                Te paso el brochure de Vista del Mar 👇
+                <PdfAttachment name="VistaDelMar_brochure.pdf" size="2.8 MB" />
+              </Bubble>
+              <Bubble side="right" delay={2000} time="9:43">
+                ¿Quieres que te agende una visita esta semana?
+              </Bubble>
+              <Bubble side="left" delay={2800} time="9:43">Sí, sábado 10am</Bubble>
+              <Bubble side="right" delay={3600} time="9:43">✅ Visita confirmada Sáb 10:00 am</Bubble>
+            </ChatArea>
+            <ChatInput />
+          </div>
+        </PhoneFrame>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+function PortalAutomation() {
+  return (
+    <section className="py-20 lg:py-24 bg-paper-2 border-y border-soft">
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Leads desde portales</div>
+          <h2 className="text-[clamp(1.9rem,3.5vw,2.8rem)] font-black tracking-tight leading-[1.05] reveal-init">
+            Cuando llega un lead de Urbania, <span className="text-primary">Tami atiende primero</span>.
+          </h2>
+          <p className="text-[15px] text-muted mt-4 reveal-init">
+            Conectamos tu cuenta de Urbania, Adondevivir y Nexo. Los leads entran directo a WhatsApp, Tami los califica en 15 segundos y solo te pasa los listos para cerrar.
+          </p>
+        </div>
+
+        <div className="bg-paper rounded-3xl border border-soft shadow-card p-6 lg:p-8 reveal-init">
+          <div className="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-5 items-stretch">
+            {/* Step 1 */}
+            <div className="bg-paper-2 rounded-2xl p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="text-primary"><UrbaniaPortalLogo className="h-5" /></div>
+              </div>
+              <div className="text-[11px] font-bold uppercase tracking-widest text-muted-2 mb-1">Origen del lead</div>
+              <div className="text-[13px] font-bold leading-snug">Andrea P. consulta el aviso "Aurora · Lima Centro"</div>
+              <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">
+                <Bell className="w-3 h-3" /> Webhook recibido
+              </div>
+            </div>
+            <FlowStepArrow />
+            {/* Step 2 */}
+            <div className="bg-primary-soft rounded-2xl p-5 border border-primary-line">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-7 h-7 rounded-lg bg-primary text-white flex items-center justify-center text-xs font-black">T</div>
+                <span className="text-[12px] font-bold text-primary-2">Tami</span>
+              </div>
+              <div className="text-[11px] font-bold uppercase tracking-widest text-primary-2 mb-1">Califica en 15s</div>
+              <div className="text-[13px] leading-snug">"Hola Andrea 👋 Vi tu interés en Aurora. ¿Buscas vivienda o inversión?"</div>
+              <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold text-primary-2 bg-paper px-2 py-1 rounded">
+                <Clock className="w-3 h-3" /> Responde en 15 seg
+              </div>
+            </div>
+            <FlowStepArrow />
+            {/* Step 3 */}
+            <div className="bg-paper-2 rounded-2xl p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-7 h-7 rounded-full bg-emerald-500 text-white text-[10px] font-black flex items-center justify-center">MC</div>
+                <span className="text-[12px] font-bold">María Castillo</span>
+              </div>
+              <div className="text-[11px] font-bold uppercase tracking-widest text-emerald-700 mb-1">Handoff al asesor</div>
+              <div className="text-[13px] leading-snug">Solo recibe leads marcados <strong className="text-emerald-700">verde</strong>, con presupuesto y zona confirmados.</div>
+              <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">
+                <Star className="w-3 h-3" /> Lead caliente
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FlowStepArrow() {
+  return (
+    <div className="hidden md:flex items-center justify-center text-primary">
+      <ArrowRight className="w-6 h-6" />
     </div>
   );
 }
@@ -652,54 +892,116 @@ function PhoneGallery() {
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Tami en acción</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            3 conversaciones <span className="text-primary">reales</span> de un día.
+            Conversaciones reales, <span className="text-primary">resultados reales</span>.
           </h2>
+          <p className="text-[15px] text-muted mt-4 reveal-init">
+            Tres casos típicos de un día normal en una inmobiliaria. Tami no improvisa — sigue tu guion comercial.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 lg:gap-6">
-          <PhoneCard title="Califica intención" desc="Filtra basura · marca verde">
-            <Bubble side="left" delay={100} time="9:14">Vi el ad de un proyecto en preventa</Bubble>
-            <Bubble side="right" delay={500} time="9:14">¡Hola! 👋 Para encontrarte el match ideal:</Bubble>
-            <Bubble side="right" delay={1100} time="9:14">¿Buscas <strong>vivienda</strong> o <strong>inversión</strong>?</Bubble>
-            <Bubble side="left" delay={1900} time="9:15">Inversión, hasta US$ 100k</Bubble>
-            <Bubble side="right" delay={2700} time="9:15">Perfecto ✅ Marcado <strong>verde</strong>. Te muestro 3 opciones…</Bubble>
-          </PhoneCard>
+        <div className="space-y-12 lg:space-y-16">
+          <ConversationCase
+            tag="Caso 01 · Califica intención"
+            title="De anuncio en Facebook a lead verde"
+            desc="Andrea ve un Reel de un proyecto en pre-venta y escribe. En 4 mensajes, Tami sabe si es comprador real o curioso, y la marca verde para que tu equipo no pierda tiempo."
+            metrics={[
+              { l: 'Tiempo de calificación', v: '< 1 min' },
+              { l: 'Resultado', v: 'Verde · inversión' },
+              { l: 'Próximo paso', v: 'Catálogo + visita' },
+            ]}
+            phone={
+              <>
+                <Bubble side="left" delay={100} time="9:14">Vi el ad de un proyecto en preventa</Bubble>
+                <Bubble side="right" delay={500} time="9:14">¡Hola! 👋 Para encontrarte el match ideal:</Bubble>
+                <Bubble side="right" delay={1100} time="9:14">¿Buscas <strong>vivienda</strong> o <strong>inversión</strong>?</Bubble>
+                <Bubble side="left" delay={1900} time="9:15">Inversión, hasta US$ 100k</Bubble>
+                <Bubble side="right" delay={2700} time="9:15">Perfecto ✅ Marcado <strong>verde</strong>. Te muestro 3 opciones…</Bubble>
+              </>
+            }
+          />
 
-          <PhoneCard title="Capta propietarios" desc="Perfila quien quiere vender" featured>
-            <Bubble side="left" delay={100} time="11:02">Hola, quiero vender mi depa de 80m²</Bubble>
-            <Bubble side="right" delay={500} time="11:02">¡Genial! Tami aquí 👋. Te ayudo a perfilar:</Bubble>
-            <Bubble side="right" delay={1100} time="11:02">¿Distrito? ¿Precio que esperas? ¿Cuándo necesitas vender?</Bubble>
-            <Bubble side="left" delay={1700} time="11:03">San Borja · ~US$ 220k · 3 meses</Bubble>
-            <Bubble side="right" delay={2400} time="11:03">📊 Promedio de zona: <strong>US$ 215-235k</strong>. Te agendo visita técnica.</Bubble>
-          </PhoneCard>
+          <ConversationCase
+            reverse
+            tag="Caso 02 · Capta propietarios"
+            title="Quien quiere vender, perfilado en 60 segundos"
+            desc="Tami atiende el lado de la captación: pregunta zona, m², precio esperado y urgencia. Compara contra el promedio de la zona y agenda la visita técnica."
+            metrics={[
+              { l: 'Promedio de zona', v: 'US$ 215–235k' },
+              { l: 'Plazo', v: '3 meses' },
+              { l: 'Próximo paso', v: 'Visita técnica' },
+            ]}
+            phone={
+              <>
+                <Bubble side="left" delay={100} time="11:02">Hola, quiero vender mi depa de 80m²</Bubble>
+                <Bubble side="right" delay={500} time="11:02">¡Genial! Tami aquí 👋. Te ayudo a perfilar:</Bubble>
+                <Bubble side="right" delay={1100} time="11:02">¿Distrito? ¿Precio que esperas? ¿Cuándo necesitas vender?</Bubble>
+                <Bubble side="left" delay={1700} time="11:03">San Borja · ~US$ 220k · 3 meses</Bubble>
+                <Bubble side="right" delay={2400} time="11:03">📊 Promedio de zona: <strong>US$ 215–235k</strong>. Te agendo visita técnica.</Bubble>
+              </>
+            }
+          />
 
-          <PhoneCard title="Deriva al asesor" desc="Handoff con contexto completo">
-            <Bubble side="left" delay={100} time="3:21">¿Aceptan pago internacional? Vivo en España</Bubble>
-            <Bubble side="right" delay={500} time="3:21">Para esto te paso con nuestro Director Comercial 🚀</Bubble>
-            <Bubble side="right" delay={1100} time="3:21">Hola, soy Martín 👋 Sí aceptamos. Te genero el link de pago…</Bubble>
-            <div className="bg-primary-soft border border-primary-line rounded-xl px-2.5 py-1.5 text-[9px] text-primary-2 font-semibold msg-anim" style={{ animationDelay: '1900ms' }}>
-              ⚡ Handoff registrado · alta intención
-            </div>
-          </PhoneCard>
+          <ConversationCase
+            tag="Caso 03 · Handoff con contexto"
+            title="Lead alta intención derivado a tu director comercial"
+            desc="Cuando Tami detecta señales de cierre (urgencia, presupuesto claro, listo para firmar), escala al humano correcto con todo el contexto cargado."
+            metrics={[
+              { l: 'Detección', v: 'Alta intención' },
+              { l: 'Asesor asignado', v: 'Director Comercial' },
+              { l: 'Tiempo', v: 'Respuesta inmediata' },
+            ]}
+            phone={
+              <>
+                <Bubble side="left" delay={100} time="3:21">¿Aceptan pago internacional? Vivo en España</Bubble>
+                <Bubble side="right" delay={500} time="3:21">Para esto te paso con nuestro Director Comercial 🚀</Bubble>
+                <Bubble side="right" delay={1100} time="3:21">Hola, soy Martín 👋 Sí aceptamos. Te genero el link de pago…</Bubble>
+                <div className="bg-primary-soft border border-primary-line rounded-xl px-2.5 py-1.5 text-[9px] text-primary-2 font-semibold msg-anim" style={{ animationDelay: '1900ms' }}>
+                  ⚡ Handoff registrado · alta intención
+                </div>
+              </>
+            }
+          />
         </div>
       </div>
     </section>
   );
 }
 
-function PhoneCard({ title, desc, featured, children }: any) {
+function ConversationCase({
+  tag, title, desc, metrics, phone, reverse = false,
+}: {
+  tag: string;
+  title: string;
+  desc: string;
+  metrics: { l: string; v: string }[];
+  phone: React.ReactNode;
+  reverse?: boolean;
+}) {
   return (
-    <div className={`reveal-init ${featured ? 'lg:-translate-y-4' : ''}`}>
-      <PhoneFrame className="w-[230px] mx-auto">
-        <div className="flex flex-col h-full">
-          <WhatsAppHeader contactName="Tami · Ventas" />
-          <ChatArea>{children}</ChatArea>
-          <ChatInput />
+    <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center reveal-init">
+      <div className={reverse ? 'lg:order-2' : ''}>
+        <div className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-3 inline-flex items-center gap-2">
+          <span className="w-5 h-px bg-primary" /> {tag}
         </div>
-      </PhoneFrame>
-      <div className="mt-7 max-w-[260px] mx-auto text-center">
-        <h3 className="text-xl font-black tracking-tight">{title}</h3>
-        <p className="text-[12px] text-muted mt-1.5">{desc}</p>
+        <h3 className="text-[clamp(1.5rem,2.8vw,2.1rem)] font-black tracking-tight leading-[1.1] mb-4">{title}</h3>
+        <p className="text-[15px] text-muted leading-relaxed mb-7 max-w-[480px]">{desc}</p>
+        <div className="grid grid-cols-3 gap-3 max-w-[520px]">
+          {metrics.map((m, i) => (
+            <div key={i} className="bg-paper-2 rounded-2xl p-4 border border-soft">
+              <div className="text-[9px] font-bold uppercase tracking-widest text-muted-2 mb-1.5">{m.l}</div>
+              <div className="text-[13px] font-black leading-tight text-primary-2">{m.v}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className={`flex justify-center ${reverse ? 'lg:order-1' : ''}`}>
+        <PhoneFrame className="w-[240px]">
+          <div className="flex flex-col h-full">
+            <WhatsAppHeader contactName="Tami · Ventas" />
+            <ChatArea>{phone}</ChatArea>
+            <ChatInput />
+          </div>
+        </PhoneFrame>
       </div>
     </div>
   );
@@ -723,11 +1025,11 @@ function CrmCloud() {
             <div className="hover:text-ink transition-colors"><SperantLogo /></div>
             <div className="hover:text-ink transition-colors"><EvoltaLogo /></div>
             <div className="hover:text-ink transition-colors"><TokkoLogo /></div>
-            <div className="hover:text-orange-500 transition-colors"><HubSpotLogo /></div>
-            <div className="hover:text-blue-500 transition-colors"><SalesforceLogo /></div>
+            <div className="hover:text-ink transition-colors"><HubSpotLogo /></div>
+            <div className="hover:text-ink transition-colors"><SalesforceLogo /></div>
             <div className="hover:text-ink transition-colors"><Bitrix24Logo /></div>
             <div className="hover:text-ink transition-colors"><PlanOKLogo /></div>
-            <div className="hover:text-emerald-600 transition-colors"><ZohoLogo /></div>
+            <div className="hover:text-ink transition-colors"><ZohoLogo /></div>
             <div className="hover:text-ink transition-colors"><MicrosoftLogo /></div>
             <div className="text-[11px] font-semibold text-muted-2">+ más</div>
           </div>
@@ -738,25 +1040,29 @@ function CrmCloud() {
             <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-5">Canales</div>
             <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
               <span className="text-[15px] font-bold inline-flex items-center gap-2">
-                <span className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center text-sm">💬</span>
+                <span className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center"><WhatsAppGlyph className="w-4 h-4" /></span>
                 WhatsApp Cloud API
               </span>
               <span className="text-[15px] font-bold inline-flex items-center gap-2">
-                <span className="w-7 h-7 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center text-sm">📸</span>
+                <span className="w-7 h-7 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center"><InstagramGlyph className="w-4 h-4" /></span>
                 Instagram
               </span>
               <span className="text-[15px] font-bold inline-flex items-center gap-2">
-                <span className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center text-sm">📘</span>
+                <span className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center"><MetaGlyph className="w-5 h-3.5" /></span>
                 Meta Ads
               </span>
               <span className="text-[15px] font-bold inline-flex items-center gap-2">
-                <span className="w-7 h-7 rounded-lg bg-paper-2 text-ink flex items-center justify-center text-sm">🌐</span>
+                <span className="w-7 h-7 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center"><MessengerGlyph className="w-4 h-4" /></span>
+                Messenger
+              </span>
+              <span className="text-[15px] font-bold inline-flex items-center gap-2">
+                <span className="w-7 h-7 rounded-lg bg-paper-2 text-ink flex items-center justify-center"><Globe className="w-4 h-4" /></span>
                 Web Widget
               </span>
             </div>
           </div>
           <div className="bg-paper rounded-3xl border border-soft shadow-card p-7 reveal-init">
-            <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-5">Portales públicos · búsqueda externa</div>
+            <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-5">Portales públicos · captación de leads</div>
             <div className="flex flex-wrap items-center gap-x-8 gap-y-5 text-muted-2">
               <div className="hover:text-ink transition"><UrbaniaPortalLogo /></div>
               <div className="hover:text-ink transition"><AdondevivirPortalLogo /></div>
@@ -775,10 +1081,13 @@ function Testimonials() {
     <section id="testimonios" className="py-24 lg:py-32 bg-paper">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mb-14">
-          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Testimonios</div>
+          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Lo que dicen nuestros clientes</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            Inmobiliarias que pasaron del<br />caos al <span className="text-primary">pipeline real</span>.
+            Inmobiliarias que dejaron de perder<br />leads en <span className="text-primary">noches y feriados</span>.
           </h2>
+          <p className="text-[15px] text-muted mt-4 max-w-[640px] reveal-init">
+            Resultados reales de equipos que cambiaron su Excel y su WhatsApp personal por una plataforma diseñada para vender propiedades.
+          </p>
         </div>
         <div className="reveal-init">
           <TestimonialsGrid />
@@ -796,9 +1105,9 @@ function Pricing() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Precios</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            Lo mismo que un asesor junior.<br />Con un equipo entero <span className="text-primary">adentro</span>.
+            Cuesta menos que un asesor junior.<br />Trabaja como un equipo <span className="text-primary">entero</span>.
           </h2>
-          <p className="text-muted mt-5">14 días gratis · 0% comisión · sin tarjeta para empezar.</p>
+          <p className="text-muted mt-5">14 días gratis · 0% comisión sobre cierres · sin tarjeta para empezar.</p>
         </div>
         <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
           <PriceCard
@@ -845,7 +1154,9 @@ function Pricing() {
 function PriceCard({ tag, title, price, iva, features, cta, highlighted }: any) {
   return (
     <div className="reveal-init">
-      <div className={`relative rounded-[2.4rem] p-9 lg:p-10 h-full flex flex-col ${highlighted ? 'bg-ink text-paper border border-ink' : 'bg-paper border border-soft shadow-card'}`}>
+      <div className={`relative rounded-[2.4rem] p-9 lg:p-10 h-full flex flex-col ${highlighted
+        ? 'bg-paper border-2 border-primary shadow-mega'
+        : 'bg-paper border border-soft shadow-card'}`}>
         {highlighted ? (
           <div className="absolute top-5 right-5 bg-primary text-white text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full">
             {tag}
@@ -853,16 +1164,16 @@ function PriceCard({ tag, title, price, iva, features, cta, highlighted }: any) 
         ) : (
           <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-2">{tag}</div>
         )}
-        <h3 className={`text-2xl font-black tracking-tight mb-7 ${highlighted ? 'mt-1' : ''}`}>{title}</h3>
+        <h3 className={`text-2xl font-black tracking-tight mb-7 ${highlighted ? 'mt-1 text-primary-2' : ''}`}>{title}</h3>
         <div className="flex items-baseline gap-2 mb-1">
           <span className="text-6xl font-black tracking-tight">${price}</span>
-          <span className={`text-sm font-medium ${highlighted ? 'text-paper/60' : 'text-muted'}`}>/mes</span>
+          <span className="text-sm font-medium text-muted">/mes</span>
         </div>
-        <p className={`text-[11px] mb-7 ${highlighted ? 'text-paper/50' : 'text-muted-2'}`}>USD {iva ? '· + IGV' : ''}</p>
+        <p className="text-[11px] mb-7 text-muted-2">USD {iva ? '· + IGV' : ''}</p>
         <ul className="space-y-3 mb-8 flex-1">
           {features.map((f: string, i: number) => (
-            <li key={i} className={`flex items-start gap-3 text-[14px] ${highlighted ? 'text-paper/85' : 'text-ink-2'}`}>
-              <AnimatedCheck className="w-4 h-4 shrink-0 mt-1" color={highlighted ? 'var(--primary)' : 'var(--primary)'} delay={i * 80} />
+            <li key={i} className="flex items-start gap-3 text-[14px] text-ink-2">
+              <AnimatedCheck className="w-4 h-4 shrink-0 mt-1" color="var(--primary)" delay={i * 80} />
               <span>{f}</span>
             </li>
           ))}
@@ -876,24 +1187,99 @@ function PriceCard({ tag, title, price, iva, features, cta, highlighted }: any) 
 }
 
 /* ──────────────────────────────────────────────────────────────────────── */
+function FAQSection() {
+  const faqs = [
+    {
+      q: '¿Cuánto tarda la activación?',
+      a: '48 horas desde la firma. Subimos tus brochures, conectamos tu WhatsApp Business API a Meta y entrenamos a Tami con tu tono y tus reglas. Empieza a atender leads desde el día 1.',
+    },
+    {
+      q: '¿Tengo que cambiar mi CRM?',
+      a: 'No. Tami se integra con Sperant, Evolta, Tokko Broker, PlanOK, HubSpot, Salesforce, Bitrix24, Zoho, Dynamics 365 y más. Si usas Excel, también te lo migramos.',
+    },
+    {
+      q: '¿De qué portales captura leads?',
+      a: 'Urbania, Adondevivir y Nexo Inmobiliario. Cada lead que llega por estos portales entra directo a la conversación de WhatsApp y Tami responde en menos de 15 segundos.',
+    },
+    {
+      q: '¿Cómo funciona la automatización en Instagram?',
+      a: 'Configuras palabras clave (por ejemplo "INFO", "PRECIO", "BROCHURE"). Cuando alguien comenta esa palabra en cualquiera de tus posts, Tami le envía automáticamente un DM con el catálogo y la opción de agendar visita.',
+    },
+    {
+      q: '¿Cobran comisión sobre los cierres?',
+      a: 'No. Tami es un fee mensual fijo. Si cierras 3 visitas o 30, el precio es el mismo. Solo escalan los costos directos de Meta (WhatsApp API), que son transparentes y van a tu cuenta.',
+    },
+    {
+      q: '¿Qué pasa después de los 14 días gratis?',
+      a: 'Si Tami convirtió y quieres seguir, eliges plan (Agente $350 o Desarrollo $500). Si no convirtió, no pagas nada. Sin tarjeta para empezar y sin compromiso.',
+    },
+    {
+      q: '¿Tami habla por sí sola o se apoya en humanos?',
+      a: 'Tami atiende toda la conversación inicial: saluda, califica, envía catálogo, agenda visita y manda recordatorios. Cuando detecta alta intención (presupuesto claro, urgencia, listo para firmar), escala al asesor humano con todo el contexto.',
+    },
+    {
+      q: '¿Y si quiero entrar yo mismo al chat?',
+      a: 'En cualquier momento. El supervisor entra al chat con un badge GERENTE visible para el cliente, toma el caso y cierra en vivo. Tami se hace a un lado.',
+    },
+  ];
+  return (
+    <section id="faq" className="py-24 lg:py-32 bg-paper">
+      <div className="max-w-[1080px] mx-auto px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Preguntas frecuentes</div>
+          <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
+            Antes de probar Tami,<br />probablemente quieras saber esto.
+          </h2>
+        </div>
+        <div className="space-y-3">
+          {faqs.map((f, i) => <FAQItem key={i} q={f.q} a={f.a} />)}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="bg-paper border border-soft rounded-2xl overflow-hidden reveal-init">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left hover:bg-paper-2 transition"
+      >
+        <span className="text-[15px] font-bold text-ink-2">{q}</span>
+        <span className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition ${open ? 'bg-primary text-white rotate-180' : 'bg-paper-2 text-primary-2'}`}>
+          <ChevronDown className="w-4 h-4" />
+        </span>
+      </button>
+      {open && (
+        <div className="px-6 pb-5 pt-0 text-[14px] text-muted leading-relaxed">{a}</div>
+      )}
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
 function FinalCTA() {
   return (
     <section className="py-24 lg:py-28 bg-paper">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
-        <div className="relative bg-ink rounded-[2.5rem] overflow-hidden p-10 lg:p-16 reveal-init">
-          <div className="absolute inset-0 bg-dots text-white/6" aria-hidden />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/15 rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-3xl translate-y-1/3" />
+        <div className="relative bg-paper-3 border border-primary-line rounded-[2.5rem] overflow-hidden p-10 lg:p-16 reveal-init">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary-soft rounded-full blur-3xl -translate-y-1/3 translate-x-1/3" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary-soft rounded-full blur-3xl translate-y-1/3" />
 
           <div className="relative grid lg:grid-cols-2 gap-10 items-center">
             <div>
-              <ShieldCheck className="w-10 h-10 text-primary-soft mb-6" />
-              <h2 className="text-[clamp(2rem,5vw,3.6rem)] font-black tracking-tight leading-[1.05] text-paper mb-5">
+              <div className="inline-flex items-center gap-2 bg-paper border border-primary-line rounded-full px-3 py-1.5 mb-5 shadow-card">
+                <ShieldCheck className="w-3.5 h-3.5 text-primary" />
+                <span className="text-[11px] font-bold uppercase tracking-widest text-primary-2">Si no convierte, no pagas</span>
+              </div>
+              <h2 className="text-[clamp(2rem,5vw,3.6rem)] font-black tracking-tight leading-[1.05] mb-5">
                 Sube tu primer<br />
                 <span className="text-primary">brochure hoy</span>.
               </h2>
-              <p className="text-paper/60 text-lg leading-relaxed max-w-md">
-                Conectamos lo que ya usas en 48h. Tami atiende leads reales en 14 días gratis. Si no convierte, no pagas.
+              <p className="text-muted text-lg leading-relaxed max-w-md">
+                Conectamos lo que ya usas en 48h. Tami atiende leads reales por 14 días gratis. Si no convierte, no pagas un sol.
               </p>
             </div>
             <div className="flex flex-col gap-3 lg:items-end">
@@ -901,10 +1287,10 @@ function FinalCTA() {
                 Comenzar mis 14 días gratis
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </a>
-              <a href={WA_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-bold text-paper border border-white/15 hover:bg-white/5 transition">
-                <MessageCircle className="w-4 h-4" /> Hablar con ventas por WhatsApp
+              <a href={WA_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-7 py-4 rounded-full font-bold text-ink border border-soft hover:border-primary-line hover:bg-paper transition">
+                <MessageCircle className="w-4 h-4 text-primary" /> Hablar con ventas por WhatsApp
               </a>
-              <span className="text-[11px] text-paper/40 mt-2">+51 995 547 575 · mvelascoo@tamibot.com</span>
+              <span className="text-[11px] text-muted-2 mt-2">+51 995 547 575 · mvelascoo@tamibot.com</span>
             </div>
           </div>
         </div>
@@ -924,18 +1310,19 @@ function Footer() {
             <span className="text-primary text-xl font-black leading-none">.</span>
           </div>
           <p className="text-muted leading-relaxed text-[13px]">
-            El Chatbot con IA que cierra ventas inmobiliarias por WhatsApp. Probado con +40 inmobiliarias en LATAM.
+            La vendedora con IA para inmobiliarias y agentes en LATAM. Probada con +40 inmobiliarias y +2.6M leads atendidos.
           </p>
         </div>
         <div>
           <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4">Producto</div>
           <ul className="space-y-2.5 text-muted text-[13px]">
+            <li><a href="#beneficios" className="hover:text-ink">Beneficios</a></li>
+            <li><a href="#para-inmobiliarias" className="hover:text-ink">Inmobiliarias</a></li>
+            <li><a href="#para-agentes" className="hover:text-ink">Agentes</a></li>
             <li><a href="#como-funciona" className="hover:text-ink">Cómo funciona</a></li>
-            <li><a href="#para-inmobiliarias" className="hover:text-ink">Para inmobiliarias</a></li>
-            <li><a href="#para-agentes" className="hover:text-ink">Para agentes</a></li>
             <li><a href="#integraciones" className="hover:text-ink">Integraciones</a></li>
             <li><a href="#precios" className="hover:text-ink">Precios</a></li>
-            <li><a href={APP_DEMO_URL} className="hover:text-ink">Portal demo →</a></li>
+            <li><a href="#faq" className="hover:text-ink">FAQ</a></li>
           </ul>
         </div>
         <div>
