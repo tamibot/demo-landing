@@ -739,11 +739,12 @@ function SocialAutomation() {
                 </li>
               ))}
             </ul>
-            <div className="flex items-center gap-3 text-muted-2">
-              <div className="w-10 h-10 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center"><InstagramGlyph className="w-5 h-5" /></div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center"><MetaGlyph className="w-6 h-4" /></div>
-              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center"><WhatsAppGlyph className="w-5 h-5" /></div>
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center"><MessengerGlyph className="w-5 h-5" /></div>
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-xl bg-pink-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/instagram.svg`} alt="Instagram" className="w-5 h-5" /></div>
+              <div className="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/meta.svg`} alt="Meta" className="w-6 h-6" /></div>
+              <div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/whatsapp.svg`} alt="WhatsApp" className="w-5 h-5" /></div>
+              <div className="w-11 h-11 rounded-xl bg-sky-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/messenger.svg`} alt="Messenger" className="w-5 h-5" /></div>
+              <div className="w-11 h-11 rounded-xl bg-rose-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/tiktok.svg`} alt="TikTok" className="w-5 h-5" /></div>
             </div>
           </div>
 
@@ -1025,11 +1026,15 @@ function CrmCloud() {
             <div className="hover:text-ink transition-colors"><SperantLogo /></div>
             <div className="hover:text-ink transition-colors"><EvoltaLogo /></div>
             <div className="hover:text-ink transition-colors"><TokkoLogo /></div>
-            <div className="hover:text-ink transition-colors"><HubSpotLogo /></div>
+            <div className="opacity-60 hover:opacity-100 transition" style={{ filter: 'grayscale(1)' }}>
+              <img src={`${import.meta.env.BASE_URL}logos/hubspot.svg`} alt="HubSpot" className="h-7 hover:[filter:none]" style={{ filter: 'inherit' }} />
+            </div>
             <div className="hover:text-ink transition-colors"><SalesforceLogo /></div>
             <div className="hover:text-ink transition-colors"><Bitrix24Logo /></div>
             <div className="hover:text-ink transition-colors"><PlanOKLogo /></div>
-            <div className="hover:text-ink transition-colors"><ZohoLogo /></div>
+            <div className="opacity-60 hover:opacity-100 transition" style={{ filter: 'grayscale(1)' }}>
+              <img src={`${import.meta.env.BASE_URL}logos/zoho.svg`} alt="Zoho" className="h-7" />
+            </div>
             <div className="hover:text-ink transition-colors"><MicrosoftLogo /></div>
             <div className="text-[11px] font-semibold text-muted-2">+ más</div>
           </div>
@@ -1040,23 +1045,27 @@ function CrmCloud() {
             <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-5">Canales</div>
             <div className="flex flex-wrap items-center gap-x-7 gap-y-4">
               <span className="text-[15px] font-bold inline-flex items-center gap-2">
-                <span className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center"><WhatsAppGlyph className="w-4 h-4" /></span>
+                <span className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/whatsapp.svg`} alt="" className="w-4 h-4" /></span>
                 WhatsApp Cloud API
               </span>
               <span className="text-[15px] font-bold inline-flex items-center gap-2">
-                <span className="w-7 h-7 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center"><InstagramGlyph className="w-4 h-4" /></span>
+                <span className="w-8 h-8 rounded-lg bg-pink-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/instagram.svg`} alt="" className="w-4 h-4" /></span>
                 Instagram
               </span>
               <span className="text-[15px] font-bold inline-flex items-center gap-2">
-                <span className="w-7 h-7 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center"><MetaGlyph className="w-5 h-3.5" /></span>
+                <span className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/meta.svg`} alt="" className="w-5 h-5" /></span>
                 Meta Ads
               </span>
               <span className="text-[15px] font-bold inline-flex items-center gap-2">
-                <span className="w-7 h-7 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center"><MessengerGlyph className="w-4 h-4" /></span>
+                <span className="w-8 h-8 rounded-lg bg-sky-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/messenger.svg`} alt="" className="w-4 h-4" /></span>
                 Messenger
               </span>
               <span className="text-[15px] font-bold inline-flex items-center gap-2">
-                <span className="w-7 h-7 rounded-lg bg-paper-2 text-ink flex items-center justify-center"><Globe className="w-4 h-4" /></span>
+                <span className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center"><img src={`${import.meta.env.BASE_URL}logos/tiktok.svg`} alt="" className="w-4 h-4" /></span>
+                TikTok
+              </span>
+              <span className="text-[15px] font-bold inline-flex items-center gap-2">
+                <span className="w-8 h-8 rounded-lg bg-paper-2 text-ink flex items-center justify-center"><Globe className="w-4 h-4" /></span>
                 Web Widget
               </span>
             </div>
