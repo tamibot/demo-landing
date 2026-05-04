@@ -370,8 +370,8 @@ function HowItWorks() {
       n: '01',
       icon: UploadCloud,
       title: 'Comparte tu información',
-      desc: 'Súbenos PDFs, brochures, link de tu web o tu Excel. También conectamos directo a Urbania, Adondevivir, Nexo, Sperant, Tokko o Evolta. Tami estructura tu inventario en minutos.',
-      bullets: ['PDF · brochures', 'Web', 'Excel', 'Urbania', 'Adondevivir', 'Sperant'],
+      desc: 'Súbenos PDFs, brochures de tus proyectos, link de tu web o tu Excel. Conectamos directo a portales (Urbania, Adondevivir, Nexo) y a tu CRM (Sperant, Tokko, Evolta). Tami estructura tu inventario en minutos.',
+      bullets: ['PDF brochures', 'Web', 'Excel', 'Urbania', 'Adondevivir', 'Nexo', 'Sperant', 'Tokko'],
     },
     {
       n: '02',
@@ -1107,12 +1107,12 @@ function Testimonials() {
     <section id="testimonios" className="py-24 lg:py-32 bg-paper">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mb-14">
-          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Lo que dicen nuestros clientes</div>
+          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Casos de éxito</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            Inmobiliarias que dejaron de perder<br />leads en <span className="text-primary">noches y feriados</span>.
+            Equipos que pasaron del<br />Excel al <span className="text-primary">pipeline real</span>.
           </h2>
           <p className="text-[15px] text-muted mt-4 max-w-[640px] reveal-init">
-            Resultados reales de equipos que cambiaron su Excel y su WhatsApp personal por una plataforma diseñada para vender propiedades.
+            Inmobiliarias, desarrolladoras y agentes en LATAM que reemplazaron su WhatsApp personal y su Excel por una plataforma diseñada para vender propiedades — y dejaron de perder leads de noche.
           </p>
         </div>
         <div className="reveal-init">
@@ -1131,9 +1131,9 @@ function Pricing() {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Precios</div>
           <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
-            Cuesta menos que un asesor junior.<br />Trabaja como un equipo <span className="text-primary">entero</span>.
+            Pagas lo que un asesor junior.<br />Vendes como un <span className="text-primary">equipo de diez</span>.
           </h2>
-          <p className="text-muted mt-5">14 días gratis · 0% comisión sobre cierres · sin tarjeta para empezar.</p>
+          <p className="text-muted mt-5 text-[16px]">14 días gratis · 0% comisión sobre cierres · sin tarjeta para empezar. Si Tami no convierte, no pagas un sol.</p>
         </div>
         <div className="grid md:grid-cols-2 gap-5 max-w-4xl mx-auto">
           <PriceCard
@@ -1169,8 +1169,23 @@ function Pricing() {
             highlighted
           />
         </div>
-        <div className="mt-10 max-w-3xl mx-auto bg-paper border border-soft rounded-2xl p-5 text-[12px] text-muted leading-relaxed reveal-init">
-          <strong className="text-ink">Costos directo a Meta — transparente:</strong> WhatsApp API saliente $0.0703/lead · entrante gratis · bloque de 500 leads adicionales $50 · cuenta adicional $150/6 meses · contrato mínimo 6 meses (Plan Desarrollo).
+        {/* Comparativa rápida vs contratar humano */}
+        <div className="mt-12 max-w-4xl mx-auto grid sm:grid-cols-3 gap-4 reveal-init">
+          {[
+            { label: 'Asesor humano junior', value: '$1,200/mes', sub: 'Atiende 8h, descansa, renuncia, vacaciones', muted: true },
+            { label: 'Tami — plan Agente', value: '$350/mes', sub: 'Atiende 24/7, no descansa, escala con tu equipo', highlight: true },
+            { label: 'Tami — plan Desarrollo', value: '$500/mes', sub: 'Multi-proyecto, distribución, supervisor en vivo', highlight: true },
+          ].map((row, i) => (
+            <div key={i} className={`rounded-2xl p-5 border ${row.highlight ? 'bg-primary-soft border-primary-line' : 'bg-paper border-soft'}`}>
+              <div className={`text-[11px] font-bold uppercase tracking-widest mb-2 ${row.highlight ? 'text-primary-2' : 'text-muted-2'}`}>{row.label}</div>
+              <div className={`text-2xl font-black mb-1 ${row.muted ? 'text-muted-2 line-through' : ''}`}>{row.value}</div>
+              <div className="text-[12px] text-muted leading-snug">{row.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 max-w-3xl mx-auto bg-paper border border-soft rounded-2xl p-5 text-[12px] text-muted leading-relaxed reveal-init">
+          <strong className="text-ink">Costos directo a Meta — transparentes:</strong> WhatsApp API saliente $0.0703/lead · entrante gratis · bloque de 500 leads adicionales $50 · cuenta adicional $150/6 meses · contrato mínimo 6 meses (Plan Desarrollo).
         </div>
       </div>
     </section>

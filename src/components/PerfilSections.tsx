@@ -42,50 +42,29 @@ export function ParaInmobiliarias() {
           </div>
         </div>
 
-        {/* Benefits grid 6-up bento */}
+        {/* 3 cards específicas de inmobiliarias (no repiten Beneficios genéricos) */}
         <div className="grid md:grid-cols-3 gap-5 mb-12">
           <BenefitCard
             icon={Megaphone}
             tag="Lanzamientos"
-            title="Envíos masivos pre-aprobados"
-            desc="Cargas tu BBDD propia, eliges plantilla con foto/video/PDF y disparas miles de mensajes en 24h. WhatsApp Cloud API directo a Meta."
+            title="Envíos masivos en 24h"
+            desc="BBDD propia + plantilla con foto, video y PDF. Disparas miles de mensajes a leads de campañas anteriores. WhatsApp Cloud API directo a Meta."
             stat="+5,000 leads en 24h"
-          />
-          <BenefitCard
-            icon={Users}
-            tag="Distribución"
-            title="Reparto equitativo automático"
-            desc="Round-robin con balance de carga + filtro por zona del lead + por proyecto. Tu gerente comercial entra al chat con badge GERENTE."
-            stat="Sin pelear leads"
-            featured
-          />
-          <BenefitCard
-            icon={BarChart3}
-            tag="Reportería"
-            title="Embudo en vivo + atribución"
-            desc="Volumen separado, tasa de cierre, costo por lead, conversión por canal y por asesor. Tu director toma decisiones con datos reales."
-            stat="Decisiones en tiempo real"
           />
           <BenefitCard
             icon={Building2}
             tag="Multi-proyecto"
-            title="Cada proyecto, su propio Tami"
+            title="Un Tami por proyecto"
             desc="Branding distinto, equipo distinto, embudo distinto. Tami habla del proyecto Vista del Mar de una forma y de Edificio Aurora de otra."
             stat="Proyectos ilimitados"
+            featured
           />
           <BenefitCard
             icon={ShieldCheck}
-            tag="Supervisor"
+            tag="Supervisor en vivo"
             title="Cierre Mágico del gerente"
-            desc="Audita conversaciones en tiempo real. Si un asesor se traba con una objeción, entras al chat con badge GERENTE y cierras tú mismo."
+            desc="Audita conversaciones en tiempo real. Si un asesor se traba, entras al chat con badge GERENTE y cierras tú mismo en vivo."
             stat="Recupera deals difíciles"
-          />
-          <BenefitCard
-            icon={MessageCircle}
-            tag="Re-engagement"
-            title="Recupera leads enfriados"
-            desc="Mensajes automáticos a 5 min, 2h, 5h y 1 semana. Cuando lanzas la siguiente fase, Tami avisa a los leads que ya tenías."
-            stat="x30 cantidad de interesados"
           />
         </div>
 
@@ -152,53 +131,30 @@ export function ParaAgentes() {
           </div>
         </div>
 
+        {/* 3 cards específicas para agentes — captación + alquiler + cotizador */}
         <div className="grid md:grid-cols-3 gap-5 mb-12">
           <BenefitCard
-            icon={KeyRound}
-            tag="Reventa"
-            title="Catálogo digital sin Excel"
-            desc="Subes tu PDF, link de la web del propietario o pegas tu hoja. Tami estructura tu inventario en minutos y lo presenta con fotos y precio."
-            stat="Setup en 48h"
+            icon={HeartHandshake}
+            tag="Captación"
+            title="Perfila propietarios que venden"
+            desc="Cuando llega 'quiero vender mi depa', Tami pregunta zona, m², precio esperado y urgencia. Tú solo vas a la visita técnica con todo perfilado."
+            stat="Pre-evaluación de precio"
             secondaryColor
           />
           <BenefitCard
             icon={KeyRound}
             tag="Alquileres"
             title="De consulta a contrato firmado"
-            desc="Tami filtra inquilinos por presupuesto, mascotas, garante y plazo. Coordina visita, envía contrato modelo y agenda firma."
+            desc="Tami filtra inquilinos por presupuesto, mascotas, garante y plazo. Coordina visita, envía contrato modelo y agenda firma. Cero domingos perdidos."
             stat="Visita en 48h"
             featured
             secondaryColor
           />
           <BenefitCard
-            icon={HeartHandshake}
-            tag="Captación"
-            title="Perfila propietarios que venden"
-            desc="Cuando llega un mensaje 'quiero vender mi depa', Tami pregunta zona, m², precio esperado y urgencia. Tú solo vas a la visita técnica."
-            stat="Pre-evaluación de precio"
-            secondaryColor
-          />
-          <BenefitCard
-            icon={Search}
-            tag="Búsqueda externa"
-            title="Urbania, Adondevivir, Nexo"
-            desc="Cuando no tienes el match perfecto en tu cartera, Tami busca en los 3 portales líderes y te lo presenta como cartera abierta."
-            stat="Cero leads desperdiciados"
-            secondaryColor
-          />
-          <BenefitCard
-            icon={Calendar}
-            tag="Agenda"
-            title="Visitas que sí se concretan"
-            desc="Sync con tu Google Calendar. Recordatorios 24h y 2h antes en WhatsApp. Reduce no-show 30% según data del rubro."
-            stat="-30% visitas caídas"
-            secondaryColor
-          />
-          <BenefitCard
             icon={FileText}
             tag="Cotizador"
-            title="PDF profesional en 30 segundos"
-            desc="Tu logo, tus colores, datos legales del agente, cuotas estimadas con tasa BCP/Mivivienda. Tami genera y envía a WhatsApp del lead."
+            title="PDF profesional en 30s"
+            desc="Tu logo, datos legales del agente, cuotas estimadas con tasa BCP/Mivivienda. Tami genera y envía al WhatsApp del lead sin que muevas un dedo."
             stat="Cotización al instante"
             secondaryColor
           />
