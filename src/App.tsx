@@ -12,19 +12,25 @@ import {
 import { DashboardScreen } from './components/DashboardMockup';
 import { TestimonialsGrid } from './components/Testimonials';
 import { ParaInmobiliarias, ParaAgentes, DemoFreeBanner } from './components/PerfilSections';
-import { AnimatedCheck, PulsingDot, StepsConnector } from './components/SvgAnimations';
+import { AnimatedCheck, PulsingDot, StepsConnector, SocialFlowConnector, FloatingParticles, AnimatedBell, OrbitRing, TypingWave } from './components/SvgAnimations';
 import {
   GrupoTCLogo, LibreLogo, LienLogo, GenericLogo,
   WhatsAppGlyph, InstagramGlyph, MetaGlyph, MessengerGlyph,
 } from './components/Logos';
 
 const ASSET = (p: string) => `${import.meta.env.BASE_URL}${p}`;
-function BrandImg({ name, src, h = 'h-8', className = '' }: { name: string; src: string; h?: string; className?: string }) {
+function BrandImg({ name, src, h = 'h-8', className = '', gray = false }: { name: string; src: string; h?: string; className?: string; gray?: boolean }) {
+  const filterStyle = gray
+    ? { filter: 'grayscale(1) brightness(0.65)', opacity: 0.7 }
+    : { opacity: 0.75 };
   return (
     <img
       src={ASSET(`logos/brands/${src}`)}
       alt={name}
-      className={`${h} w-auto opacity-70 hover:opacity-100 transition ${className}`}
+      className={`${h} w-auto hover:opacity-100 transition ${className}`}
+      style={filterStyle}
+      onMouseEnter={(e) => { (e.currentTarget.style.opacity = '1'); }}
+      onMouseLeave={(e) => { (e.currentTarget.style.opacity = String(filterStyle.opacity || 0.75)); }}
       loading="lazy"
     />
   );
@@ -152,6 +158,8 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden hero-bg grain border-b border-soft">
+      {/* Floating SVG particles in background */}
+      <FloatingParticles className="absolute inset-0 w-full h-full pointer-events-none opacity-60" count={14} color="var(--primary)" />
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-32">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
           <div className="reveal-init">
@@ -261,7 +269,7 @@ function ClientsStrip() {
   const clients = [
     <BrandImg name="Líder Grupo Constructor" src="lider.png" h="h-8" />,
     <BrandImg name="COSAPI Inmobiliaria" src="cosapi.png" h="h-9" />,
-    <BrandImg name="RE/MAX" src="remax.png" h="h-8" />,
+    <BrandImg name="RE/MAX" src="remax.svg" h="h-8" gray />,
     <GrupoTCLogo />, <LibreLogo />, <LienLogo />,
     <GenericLogo name="Comunidad" />, <GenericLogo name="Barqueros" />, <GenericLogo name="Innova&Build" />,
     <GenericLogo name="NOS" />, <GenericLogo name="Anden Inv." />, <GenericLogo name="Gestión Inm." />,
@@ -295,8 +303,10 @@ function Stats() {
     { v: 10, suffix: 'x', d: 'capacidad de atención', decimals: 0 },
   ];
   return (
-    <section className="py-20 bg-paper-2 border-b border-soft">
-      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
+    <section className="py-20 bg-paper-2 border-b border-soft relative overflow-hidden">
+      <OrbitRing className="absolute -top-20 -right-20 w-72 h-72 opacity-30 hidden md:block" color="var(--primary)" />
+      <OrbitRing className="absolute -bottom-20 -left-20 w-60 h-60 opacity-25 hidden md:block" color="var(--secondary)" />
+      <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-10 lg:gap-4">
           {stats.map((s, i) => (
             <div key={i} className="reveal-init text-center md:text-left" style={{ animationDelay: `${i * 100}ms` }}>
@@ -769,7 +779,11 @@ function SocialAutomation() {
 
 function InstagramAutomationMockup() {
   return (
-    <div className="grid grid-cols-[1.05fr_1fr] gap-4 items-start">
+    <div className="relative grid grid-cols-[1.05fr_1fr] gap-4 items-start">
+      {/* Animated SVG flow connecting IG post → WhatsApp DM */}
+      <div className="hidden lg:block absolute left-[52%] top-[32%] w-[12%] h-20 -translate-x-1/2 pointer-events-none z-10">
+        <SocialFlowConnector className="w-full h-full" />
+      </div>
       {/* Left: Instagram post */}
       <div className="bg-paper border border-soft rounded-3xl overflow-hidden shadow-mega">
         <div className="px-4 py-3 flex items-center gap-2.5 border-b border-soft">
@@ -851,7 +865,7 @@ function PortalAutomation() {
               <div className="text-[11px] font-bold uppercase tracking-widest text-muted-2 mb-1">Origen del lead</div>
               <div className="text-[13px] font-bold leading-snug">Andrea P. consulta el aviso "Aurora · Lima Centro"</div>
               <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-1 rounded">
-                <Bell className="w-3 h-3" /> Webhook recibido
+                <AnimatedBell className="w-3 h-3" color="currentColor" /> Webhook recibido
               </div>
             </div>
             <FlowStepArrow />
@@ -1037,11 +1051,11 @@ function CrmCloud() {
             <BrandImg name="Evolta" src="evolta.png" h="h-7" />
             <BrandImg name="Tokko Broker" src="tokko.png" h="h-7" />
             <BrandImg name="HubSpot" src="../hubspot.svg" h="h-7" />
-            <BrandImg name="Salesforce" src="salesforce.png" h="h-7" />
-            <BrandImg name="Bitrix24" src="bitrix24.png" h="h-7" />
+            <BrandImg name="Salesforce" src="salesforce.svg" h="h-8" gray />
+            <BrandImg name="Bitrix24" src="bitrix24.svg" h="h-7" gray />
             <BrandImg name="PlanOK" src="planok.png" h="h-7" />
             <BrandImg name="Zoho" src="../zoho.svg" h="h-7" />
-            <BrandImg name="Microsoft Dynamics" src="microsoft.png" h="h-7" />
+            <BrandImg name="Microsoft" src="microsoft.svg" h="h-6" gray />
             <div className="text-[11px] font-semibold text-muted-2">+ más</div>
           </div>
         </div>

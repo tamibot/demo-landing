@@ -157,3 +157,113 @@ export function RadarScan({ className = 'w-12 h-12', color = 'var(--primary)' }:
     </svg>
   );
 }
+
+/** Animated dotted curved connector — for "from comment to DM" social flow.
+ *  Renders a flowing dashed line with a moving dot along the path. */
+export function SocialFlowConnector({ className = '', color = 'var(--primary)' }: { className?: string; color?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 200 80" fill="none" preserveAspectRatio="none" aria-hidden>
+      <path
+        id="socFlow"
+        d="M 8 40 C 60 5, 140 75, 192 40"
+        stroke={color}
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeDasharray="4 6"
+        opacity="0.55"
+        className="dash-flow"
+      />
+      <circle r="3.2" fill={color}>
+        <animateMotion dur="3s" repeatCount="indefinite">
+          <mpath href="#socFlow" />
+        </animateMotion>
+      </circle>
+      <circle cx="8" cy="40" r="4" fill={color} opacity="0.85" className="svg-pulse" />
+      <circle cx="192" cy="40" r="4" fill="var(--secondary)" opacity="0.85" className="svg-pulse" />
+    </svg>
+  );
+}
+
+/** Floating sparkle particles — decorative around hero / sections.
+ *  Multiple sparkles drifting + twinkling. */
+export function FloatingParticles({ className = '', count = 8, color = 'var(--primary)' }: { className?: string; count?: number; color?: string }) {
+  const particles = Array.from({ length: count }, (_, i) => ({
+    cx: 5 + Math.random() * 90,
+    cy: 5 + Math.random() * 90,
+    r: 0.6 + Math.random() * 1.4,
+    dur: 3 + Math.random() * 4,
+    delay: -Math.random() * 5,
+    opacity: 0.3 + Math.random() * 0.5,
+    key: i,
+  }));
+  return (
+    <svg className={className} viewBox="0 0 100 100" fill="none" preserveAspectRatio="none" aria-hidden>
+      {particles.map(p => (
+        <circle key={p.key} cx={p.cx} cy={p.cy} r={p.r} fill={color} opacity={p.opacity}>
+          <animate attributeName="opacity" values={`${p.opacity};0;${p.opacity}`} dur={`${p.dur}s`} begin={`${p.delay}s`} repeatCount="indefinite" />
+          <animate attributeName="cy" values={`${p.cy};${p.cy - 8};${p.cy}`} dur={`${p.dur * 1.5}s`} begin={`${p.delay}s`} repeatCount="indefinite" />
+        </circle>
+      ))}
+    </svg>
+  );
+}
+
+/** Animated bell with shake — for notification chips */
+export function AnimatedBell({ className = 'w-4 h-4', color = 'currentColor' }: { className?: string; color?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <g style={{ transformOrigin: '50% 20%' }}>
+        <animateTransform attributeName="transform" type="rotate" values="0;-12;12;-8;8;0" dur="1.4s" repeatCount="indefinite" />
+        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+      </g>
+    </svg>
+  );
+}
+
+/** Animated counter ring — orbits primary color around a center value */
+export function OrbitRing({ className = 'w-32 h-32', color = 'var(--primary)' }: { className?: string; color?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 100 100" fill="none" aria-hidden>
+      <circle cx="50" cy="50" r="40" stroke={color} strokeWidth="0.5" strokeDasharray="2 4" opacity="0.4" />
+      <circle cx="50" cy="50" r="30" stroke={color} strokeWidth="0.5" strokeDasharray="2 4" opacity="0.5" />
+      <circle cx="50" cy="10" r="2.5" fill={color}>
+        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="6s" repeatCount="indefinite" />
+      </circle>
+      <circle cx="50" cy="20" r="1.5" fill="var(--secondary)">
+        <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="-360 50 50" dur="4s" repeatCount="indefinite" />
+      </circle>
+    </svg>
+  );
+}
+
+/** Typing wave — three dots that rise/fall like Tami is thinking */
+export function TypingWave({ className = 'w-12 h-4', color = 'var(--primary)' }: { className?: string; color?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 16" fill={color} aria-hidden>
+      {[8, 24, 40].map((cx, i) => (
+        <circle key={i} cx={cx} cy="8" r="3.2">
+          <animate attributeName="cy" values="8;3;8" dur="1.2s" begin={`${i * 0.2}s`} repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.4;1;0.4" dur="1.2s" begin={`${i * 0.2}s`} repeatCount="indefinite" />
+        </circle>
+      ))}
+    </svg>
+  );
+}
+
+/** Wavy underline — animated handwritten-like underline that draws-in on viewport entry */
+export function WavyUnderline({ className = 'w-full h-3', color = 'var(--primary)' }: { className?: string; color?: string }) {
+  const { ref, inView } = useInView<SVGSVGElement>();
+  return (
+    <svg ref={ref} className={className} viewBox="0 0 200 10" fill="none" preserveAspectRatio="none" aria-hidden>
+      <path
+        d="M2 7 Q 25 2, 50 5 T 100 5 T 150 5 T 198 5"
+        stroke={color}
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        className={inView ? 'svg-draw-fast' : ''}
+        style={{ strokeDashoffset: inView ? undefined : 500 }}
+      />
+    </svg>
+  );
+}
