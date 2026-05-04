@@ -16,14 +16,14 @@ export function ParaInmobiliarias() {
 
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-14 reveal-init">
-          <div className="inline-flex items-center gap-2 bg-primary-soft border border-primary-line text-primary-2 rounded-full px-3 py-1.5 mb-5">
-            <Building2 className="w-3.5 h-3.5" />
-            <span className="text-[11px] font-bold uppercase tracking-wider">Para inmobiliarias y desarrolladoras</span>
+        <div className="mb-14 reveal-init text-center lg:text-left">
+          <div className="inline-flex items-center gap-2.5 bg-primary-soft border border-primary-line text-primary-2 rounded-full px-5 py-2 mb-7">
+            <Building2 className="w-4 h-4" />
+            <span className="text-[13px] font-bold uppercase tracking-wider">Para inmobiliarias y desarrolladoras</span>
           </div>
           <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
             <div>
-              <h2 className="text-[clamp(2.2rem,4.8vw,3.6rem)] font-black tracking-tight leading-[1.05] max-w-[820px]">
+              <h2 className="text-[clamp(1.85rem,3.6vw,2.7rem)] font-black tracking-tight leading-[1.1] max-w-[760px] mx-auto lg:mx-0">
                 Tu próximo lanzamiento sin equipos saturados ni <span className="underline-curve">leads enfriados</span>.
               </h2>
               <p className="text-[17px] text-muted leading-relaxed mt-5 max-w-[640px]">
@@ -127,14 +127,14 @@ export function ParaAgentes() {
       <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-secondary-soft rounded-full blur-3xl opacity-50 -translate-y-1/3 -translate-x-1/3 pointer-events-none" />
 
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8">
-        <div className="mb-14 reveal-init">
-          <div className="inline-flex items-center gap-2 bg-secondary-soft border border-secondary/20 text-secondary-2 rounded-full px-3 py-1.5 mb-5">
-            <HeartHandshake className="w-3.5 h-3.5" />
-            <span className="text-[11px] font-bold uppercase tracking-wider">Para agentes inmobiliarios y agencias</span>
+        <div className="mb-14 reveal-init text-center lg:text-left">
+          <div className="inline-flex items-center gap-2.5 bg-secondary-soft border border-secondary/20 text-secondary-2 rounded-full px-5 py-2 mb-7">
+            <HeartHandshake className="w-4 h-4" />
+            <span className="text-[13px] font-bold uppercase tracking-wider">Para agentes inmobiliarios y agencias</span>
           </div>
           <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
             <div>
-              <h2 className="text-[clamp(2.2rem,4.8vw,3.6rem)] font-black tracking-tight leading-[1.05] max-w-[820px]">
+              <h2 className="text-[clamp(1.85rem,3.6vw,2.7rem)] font-black tracking-tight leading-[1.1] max-w-[760px] mx-auto lg:mx-0">
                 Vende reventa, alquileres y capta propiedades — <span className="text-secondary-2">sin perder fines de semana</span>.
               </h2>
               <p className="text-[17px] text-muted leading-relaxed mt-5 max-w-[640px]">

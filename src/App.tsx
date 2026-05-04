@@ -62,22 +62,17 @@ export default function App() {
       <DemoBanner />
       <Nav />
       <Hero />
-      <ClientsStrip />
       <Stats />
+      <ClientsStrip />
       <Beneficios />
+      <HowItWorks />
       <ParaInmobiliarias />
       <ParaAgentes />
-      <HowItWorks />
-      <FeatureCapture />
-      <FeatureQualify />
-      <FeatureSchedule />
-      <FeatureDistribute />
       <SocialAutomation />
       <PortalAutomation />
       <PhoneGallery />
       <CrmCloud />
       <Testimonials />
-      <DemoFreeBanner />
       <Pricing />
       <FAQSection />
       <FinalCTA />
@@ -158,8 +153,6 @@ function Nav() {
 function Hero() {
   return (
     <section className="relative overflow-hidden hero-bg grain border-b border-soft">
-      {/* Floating SVG particles in background */}
-      <FloatingParticles className="absolute inset-0 w-full h-full pointer-events-none opacity-60" count={14} color="var(--primary)" />
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-8 pt-20 pb-24 lg:pt-28 lg:pb-32">
         <div className="grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center">
           <div className="reveal-init">
@@ -266,24 +259,28 @@ function Hero() {
 
 /* ──────────────────────────────────────────────────────────────────────── */
 function ClientsStrip() {
+  // Only real, branded logos — uniform height, all grayscale
   const clients = [
-    <BrandImg name="Líder Grupo Constructor" src="lider.png" h="h-8" />,
-    <BrandImg name="COSAPI Inmobiliaria" src="cosapi.png" h="h-9" />,
-    <BrandImg name="RE/MAX" src="remax.svg" h="h-8" gray />,
-    <GrupoTCLogo />, <LibreLogo />, <LienLogo />,
-    <GenericLogo name="Comunidad" />, <GenericLogo name="Barqueros" />, <GenericLogo name="Innova&Build" />,
-    <GenericLogo name="NOS" />, <GenericLogo name="Anden Inv." />, <GenericLogo name="Gestión Inm." />,
+    { name: 'Líder Grupo Constructor', src: 'lider.png', h: 'h-9' },
+    { name: 'COSAPI Inmobiliaria', src: 'cosapi.png', h: 'h-9' },
+    { name: 'RE/MAX', src: 'remax.svg', h: 'h-8', gray: true },
+    { name: 'Sperant', src: 'sperant.png', h: 'h-8' },
+    { name: 'Tokko Broker', src: 'tokko.png', h: 'h-8' },
+    { name: 'Evolta', src: 'evolta.png', h: 'h-8' },
+    { name: 'PlanOK', src: 'planok.png', h: 'h-8' },
   ];
   return (
-    <section className="py-12 bg-paper border-b border-soft">
+    <section className="py-14 bg-paper border-b border-soft">
       <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
-        <p className="text-center text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-9">
-          Inmobiliarias y desarrolladoras que ya venden con Tami
+        <p className="text-center text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-10">
+          Inmobiliarias, agencias y CRMs que confían en Tami
         </p>
         <div className="relative overflow-hidden">
-          <div className="flex gap-14 lg:gap-20 animate-marquee items-center">
-            {[...clients, ...clients].map((logo, i) => (
-              <div key={i} className="shrink-0 text-muted-2 hover:text-ink transition-colors">{logo}</div>
+          <div className="flex gap-16 lg:gap-24 animate-marquee items-center">
+            {[...clients, ...clients, ...clients].map((c, i) => (
+              <div key={i} className="shrink-0 grayscale opacity-60 hover:opacity-100 hover:grayscale-0 transition">
+                <BrandImg name={c.name} src={c.src} h={c.h} gray={c.gray} />
+              </div>
             ))}
           </div>
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-paper to-transparent pointer-events-none" />
