@@ -62,17 +62,17 @@ export default function App() {
       <DemoBanner />
       <Nav />
       <Hero />
-      <Stats />
       <ClientsStrip />
+      <Pain />
       <Beneficios />
+      <Escenarios />
       <HowItWorks />
       <ParaInmobiliarias />
       <ParaAgentes />
-      <SocialAutomation />
-      <PortalAutomation />
+      <Resultados />
       <PhoneGallery />
-      <CrmCloud />
       <Testimonials />
+      <CrmCloud />
       <Pricing />
       <FAQSection />
       <FinalCTA />
@@ -158,38 +158,40 @@ function Hero() {
           <div className="reveal-init">
             <div className="inline-flex items-center gap-2 bg-paper border border-soft rounded-full px-3 py-1.5 mb-7 shadow-card">
               <PulsingDot color="var(--secondary)" size={6} />
-              <span className="text-[11px] font-semibold text-muted">+2.6M leads inmobiliarios atendidos en LATAM</span>
+              <span className="text-[11px] font-semibold text-muted">Agente de ventas IA · para inmobiliarias y agentes</span>
             </div>
 
             <h1 className="text-[clamp(2.6rem,5.6vw,4.4rem)] leading-[1.02] font-black tracking-tight mb-6">
-              Vende más departamentos<br />
-              con una <span className="text-primary">vendedora con IA</span><br />
-              que nunca duerme en <span className="underline-curve">WhatsApp</span>.
+              Una vendedora <span className="text-primary">con IA</span><br />
+              que cierra <br />
+              propiedades por ti.
             </h1>
 
             <p className="text-[18px] leading-relaxed text-muted max-w-[540px] mb-9">
-              Tami atiende cada lead en <strong className="text-ink">15 segundos</strong>, califica la intención, agenda la visita y deriva al asesor solo cuando vale la pena. Conectada con tus portales, redes y CRM desde el día 1.
+              <span className="text-primary font-bold">→</span> Conectas WhatsApp, Instagram y portales (Urbania, Adondevivir, Nexo). Tami responde en 15 segundos, califica al lead, agenda la visita y deriva al asesor — <strong className="text-ink">24/7, sin contratar a nadie</strong>.
             </p>
 
             <div className="flex flex-wrap items-center gap-3 mb-7">
               <a href={APP_DEMO_URL} className="group inline-flex items-center gap-2 bg-primary hover:bg-primary-2 text-white px-7 py-4 rounded-full font-bold text-[14px] transition shadow-cta">
-                Comenzar mis 14 días gratis
+                Activar a Tami · 14 días gratis
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </a>
-              <a href="#como-funciona" className="inline-flex items-center gap-2 px-6 py-4 rounded-full font-bold text-[14px] text-ink border border-soft hover:border-primary-line hover:bg-primary-soft/40 transition">
-                Ver cómo funciona <ChevronRight className="w-4 h-4" />
+              <a href={APP_DEMO_URL} className="inline-flex items-center gap-2 px-6 py-4 rounded-full font-bold text-[14px] text-ink border border-soft hover:border-primary-line hover:bg-primary-soft/40 transition">
+                Ver demo en vivo <ChevronRight className="w-4 h-4" />
               </a>
             </div>
 
-            <div className="flex flex-wrap items-center gap-x-7 gap-y-3 text-[13px] text-muted">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-muted">
               <span className="inline-flex items-center gap-1.5">
                 <AnimatedCheck className="w-4 h-4" color="var(--primary)" delay={0} /> 14 días gratis
               </span>
+              <span className="text-muted-2">·</span>
               <span className="inline-flex items-center gap-1.5">
-                <AnimatedCheck className="w-4 h-4" color="var(--primary)" delay={150} /> 0% comisión sobre cierres
+                <AnimatedCheck className="w-4 h-4" color="var(--primary)" delay={150} /> Cancelas en un click
               </span>
+              <span className="text-muted-2">·</span>
               <span className="inline-flex items-center gap-1.5">
-                <AnimatedCheck className="w-4 h-4" color="var(--primary)" delay={300} /> Sin tarjeta para empezar
+                <AnimatedCheck className="w-4 h-4" color="var(--primary)" delay={300} /> Sin contratos largos
               </span>
             </div>
           </div>
@@ -311,6 +313,41 @@ function Stats() {
                 <CountUp end={s.v} decimals={s.decimals} suffix={s.suffix} prefix={s.prefix} />
               </div>
               <p className="text-[13px] text-muted leading-snug max-w-[180px] md:max-w-none mx-auto md:mx-0">{s.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+function Pain() {
+  const points = [
+    { stat: '70%', label: 'de leads se enfría', desc: 'Si no respondes el primer mensaje en 5 minutos, la probabilidad de cierre cae 70%. Tus asesores no pueden con todo.' },
+    { stat: '$1.2k', label: 'gastas por asesor', desc: 'Y solo trabaja 8 horas. No atiende noches, fines de semana ni feriados — justo cuando tu lead de Meta Ads escribe.' },
+    { stat: '0', label: 'leads cerrados a las 11pm', desc: 'Tu cliente vio el ad de Urbania, te escribió un domingo. Si respondes el lunes, ya separó con la competencia.' },
+  ];
+  return (
+    <section className="py-24 lg:py-28 bg-paper-2 border-y border-soft">
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
+        <div className="max-w-3xl mb-14 reveal-init">
+          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-primary-2 mb-4">El problema real</div>
+          <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05]">
+            Cada lead sin responder<br />es una propiedad <span className="underline-curve">vendida por la competencia</span>.
+          </h2>
+          <p className="text-[16px] text-muted leading-relaxed mt-5 max-w-[640px]">
+            Inviertes miles de soles en Meta Ads, pagas portales, contratas asesores. Y aún así pierdes el 70% de los leads en las primeras horas porque nadie contesta a tiempo.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-5">
+          {points.map((p, i) => (
+            <div key={i} className="bg-paper rounded-3xl border border-soft p-7 reveal-init" style={{ animationDelay: `${i * 100}ms` }}>
+              <div className="flex items-baseline gap-3 mb-3">
+                <span className="text-5xl font-black text-primary tracking-tight">{p.stat}</span>
+                <span className="text-[13px] font-bold text-ink-2">{p.label}</span>
+              </div>
+              <p className="text-[14px] text-muted leading-relaxed">{p.desc}</p>
             </div>
           ))}
         </div>
@@ -724,6 +761,205 @@ function DistributionMockup() {
         </span>
       </div>
     </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+function Escenarios() {
+  return (
+    <section id="escenarios" className="py-24 lg:py-32 bg-paper">
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4 reveal-init">Cuatro escenarios</div>
+          <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] reveal-init">
+            Donde tú pierdes leads,<br />Tami los <span className="text-primary">cierra</span>.
+          </h2>
+          <p className="text-[15px] text-muted mt-4 reveal-init">
+            Cada DM, cada comentario, cada lead de portal y cada mensaje de noche. Tami los maneja todos en 15 segundos.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          {/* 1. Lead de Meta Ads */}
+          <ScenarioCard
+            badge="Meta Ads · Facebook"
+            badgeColor="bg-blue-50 text-blue-700"
+            title="Lead llega del ad de Facebook"
+            desc="Andrea hace clic en tu ad de pre-venta. Tami responde por WhatsApp en 15 segundos, le envía el brochure y agenda la visita."
+            mockup={
+              <PhoneFrame className="w-[210px] mx-auto">
+                <div className="flex flex-col h-full">
+                  <WhatsAppHeader contactName="Tami · Ventas" />
+                  <ChatArea>
+                    <Bubble side="left" delay={100} time="9:14">Vi el ad del proyecto en preventa</Bubble>
+                    <Bubble side="right" delay={500} time="9:14">¡Hola Andrea! 👋 Te paso el brochure 👇</Bubble>
+                    <Bubble side="right" delay={1100} time="9:14"><PdfAttachment name="Vista_del_Mar.pdf" size="2.8 MB" /></Bubble>
+                    <Bubble side="left" delay={1900} time="9:15">Me interesa, ¿visita el sábado?</Bubble>
+                    <Bubble side="right" delay={2700} time="9:15">✅ Sáb 10am confirmada</Bubble>
+                  </ChatArea>
+                </div>
+              </PhoneFrame>
+            }
+          />
+
+          {/* 2. Comentario en IG → DM */}
+          <ScenarioCard
+            badge="Instagram · Comentario"
+            badgeColor="bg-pink-50 text-pink-700"
+            title='Alguien comenta "INFO" en tu post'
+            desc="Tami detecta la palabra clave y le envía un DM automático con el catálogo, el precio y el botón de agendar visita."
+            mockup={<InstagramSnippet />}
+          />
+
+          {/* 3. Lead de portal */}
+          <ScenarioCard
+            badge="Urbania · Adondevivir · Nexo"
+            badgeColor="bg-emerald-50 text-emerald-700"
+            title="Lead nuevo desde un portal inmobiliario"
+            desc="Tami recibe el webhook, califica al lead en 4 preguntas (presupuesto, zona, crédito, urgencia) y lo deriva al asesor con badge verde."
+            mockup={<PortalFlowSnippet />}
+          />
+
+          {/* 4. Mensaje a las 11pm */}
+          <ScenarioCard
+            badge="WhatsApp · 11:43 pm"
+            badgeColor="bg-violet-50 text-violet-700"
+            title="Cliente escribe un domingo a las 11pm"
+            desc="Tu equipo está dormido. Tami no. Responde, califica, y deja la cita lista para que el lunes tu asesor solo cierre."
+            mockup={
+              <PhoneFrame className="w-[210px] mx-auto">
+                <div className="flex flex-col h-full">
+                  <WhatsAppHeader contactName="Tami · 24/7" status="en línea" />
+                  <ChatArea>
+                    <Bubble side="left" delay={100} time="23:43">¿Aún tienen el depa de Surco?</Bubble>
+                    <Bubble side="right" delay={500} time="23:43">¡Hola! Sí 🏠 ¿Para vivir o invertir?</Bubble>
+                    <Bubble side="left" delay={1100} time="23:44">Vivir, con mi pareja</Bubble>
+                    <Bubble side="right" delay={1900} time="23:44">Te muestro 3 opciones desde US$ 89,500 ✨</Bubble>
+                    <Bubble side="right" delay={2700} time="23:45">¿Visita el martes 6pm?</Bubble>
+                  </ChatArea>
+                </div>
+              </PhoneFrame>
+            }
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ScenarioCard({ badge, badgeColor, title, desc, mockup }: { badge: string; badgeColor: string; title: string; desc: string; mockup: React.ReactNode }) {
+  return (
+    <div className="reveal-init bg-paper-2 rounded-3xl border border-soft p-7 lg:p-8 hover:shadow-mega transition">
+      <div className="grid sm:grid-cols-[1fr_auto] gap-6 items-center">
+        <div>
+          <span className={`inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${badgeColor} mb-4`}>
+            <PulsingDot color="currentColor" size={5} /> {badge}
+          </span>
+          <h3 className="text-[20px] font-black tracking-tight leading-[1.15] mb-3">{title}</h3>
+          <p className="text-[14px] text-muted leading-relaxed">{desc}</p>
+        </div>
+        <div className="shrink-0 max-w-[210px] mx-auto sm:mx-0">{mockup}</div>
+      </div>
+    </div>
+  );
+}
+
+function InstagramSnippet() {
+  return (
+    <div className="bg-paper rounded-2xl border border-soft overflow-hidden shadow-card w-[220px]">
+      <div className="px-3 py-2 flex items-center gap-2 border-b border-soft">
+        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-fuchsia-500 via-rose-500 to-amber-400 p-[2px]">
+          <div className="w-full h-full rounded-full bg-paper flex items-center justify-center text-[10px] font-bold">L</div>
+        </div>
+        <div className="flex-1">
+          <div className="text-[10px] font-bold leading-tight">lider.constructor</div>
+          <div className="text-[8px] text-muted-2">Patrocinado</div>
+        </div>
+        <InstagramGlyph className="w-3.5 h-3.5 text-pink-600" />
+      </div>
+      <div className="aspect-[4/3] bg-gradient-to-br from-purple-200 via-pink-200 to-amber-100 flex items-center justify-center text-3xl">🏢</div>
+      <div className="px-3 py-2 space-y-1.5">
+        <div className="text-[10px] leading-snug"><strong>Pre-venta Vista del Mar</strong>. Comenta <strong className="text-primary">INFO</strong> y te enviamos el brochure 📩</div>
+        <div className="border-t border-soft pt-1.5 mt-2 space-y-1">
+          {[{u:'andrea_p21', t:'INFO 🙌'}, {u:'jcastro.lima', t:'INFO'}].map((c,i) => (
+            <div key={i} className="text-[9px] flex items-center gap-1.5">
+              <strong>{c.u}</strong> <span className="text-muted">{c.t}</span>
+              <span className="ml-auto text-[7px] font-bold text-primary bg-primary-soft px-1 rounded">→ Tami</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PortalFlowSnippet() {
+  return (
+    <div className="bg-paper rounded-2xl border border-soft p-3 shadow-card w-[220px] space-y-2">
+      <div className="bg-paper-2 rounded-xl p-2.5 border border-soft">
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <BrandImg name="Urbania" src="urbania.png" h="h-4" />
+        </div>
+        <div className="text-[10px] font-bold">Andrea P. → "Aurora · Lima Centro"</div>
+        <div className="text-[8px] text-emerald-700 font-bold mt-1 inline-flex items-center gap-1"><Bell className="w-2.5 h-2.5" /> Webhook recibido</div>
+      </div>
+      <div className="flex justify-center text-primary"><ArrowRight className="w-4 h-4 rotate-90" /></div>
+      <div className="bg-primary-soft border border-primary-line rounded-xl p-2.5">
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <div className="w-5 h-5 rounded bg-primary text-white text-[8px] font-black flex items-center justify-center">T</div>
+          <span className="text-[10px] font-bold text-primary-2">Tami califica · 15s</span>
+        </div>
+        <div className="text-[10px] leading-snug">"¿Buscas vivienda o inversión? ¿Crédito o contado?"</div>
+      </div>
+      <div className="flex justify-center text-primary"><ArrowRight className="w-4 h-4 rotate-90" /></div>
+      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-2.5">
+        <div className="flex items-center gap-1.5">
+          <div className="w-5 h-5 rounded-full bg-emerald-500 text-white text-[8px] font-black flex items-center justify-center">MC</div>
+          <span className="text-[10px] font-bold">María Castillo</span>
+          <span className="ml-auto text-[8px] font-black text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded">VERDE</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────────────────── */
+function Resultados() {
+  return (
+    <section id="resultados" className="py-24 lg:py-32 bg-paper-2 border-y border-soft">
+      <div className="max-w-[1240px] mx-auto px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-16 items-center">
+          <div className="reveal-init">
+            <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-muted-2 mb-4">Resultados</div>
+            <h2 className="text-[clamp(2.2rem,4.5vw,3.4rem)] font-black tracking-tight leading-[1.05] mb-5">
+              Lo que pasa cuando<br />Tami toma <span className="text-primary">tu WhatsApp</span>.
+            </h2>
+            <p className="text-[16px] text-muted leading-relaxed mb-8 max-w-[480px]">
+              Cada lunes ves cuánto vendió Tami mientras dormías. Cuántos leads atendió, cuántas visitas agendó, cuánto separaron tus asesores. Atribución por canal y por persona — sin Excel.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                'Volumen separado por proyecto',
+                'Tasa de cierre por asesor',
+                'Costo por lead por canal (Meta, IG, Urbania, web)',
+                'Embudo en vivo · sin esperar fin de mes',
+              ].map((b, i) => (
+                <li key={i} className="flex items-start gap-3 text-[14px]">
+                  <AnimatedCheck className="w-4 h-4 shrink-0 mt-1" color="var(--primary)" delay={i * 100} />
+                  <span>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <a href={APP_DEMO_URL} className="inline-flex items-center gap-2 bg-primary hover:bg-primary-2 text-white px-6 py-3.5 rounded-full font-bold text-[14px] transition shadow-cta">
+              Ver el dashboard en vivo <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+          <div className="reveal-init">
+            <DashboardScreen />
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
